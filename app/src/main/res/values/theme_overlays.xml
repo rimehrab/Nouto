@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="ThemeOverlay.CircleNavigationButton" parent="ThemeOverlay.Material3.Toolbar.CircleNavigationButton">
+        <item name="toolbarNavigationButtonCircleColor">?colorSurfaceContainerHighest</item>
+    </style>
+</resources>

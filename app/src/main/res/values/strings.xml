@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Nouto</string>
+    <string name="save">Save</string>
+    <string name="title">Title</string>
+    <string name="notes_hint">Type your notes here</string>
+    <string name="delete">Delete</string>
+    <string name="add_note">Add note</string>
+    <string name="searchbar_hint">Search</string>
+    <string name="navigation_drawer_description">Navigation drawer</string>
+    <string name="layout_switch_description">Switch layout</string>
+    <string name="bold_style_description">Bold style</string>
+    <string name="italic_style_description">Italic style</string>
+    <string name="underline_style_description">Underline style</string>
+    <string name="notes">Notes</string>
+    <string name="settings">Settings</string>
+    <string name="search_delete_button_description">Delete suggestion</string>
+</resources>

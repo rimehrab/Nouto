@@ -1,0 +1,4 @@
+<resources>
+    <style name="Base.Theme.Nouto" parent="Theme.Material3Expressive.DynamicColors.Dark.NoActionBar">
+    </style>
+</resources>
