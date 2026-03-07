@@ -39,9 +39,7 @@ class MainSearchView(
         activity.onBackPressedDispatcher.addCallback(lifecycleOwner, backCallback)
         setupRecyclerView()
         setupSearchView()
-        searchViewModel.searchHistory.observe(lifecycleOwner) { history ->
-            searchAdapter.submitList(history)
-        }
+        observeViewModel(lifecycleOwner)
     }
 
     private fun setupSearchView() {
@@ -64,7 +62,6 @@ class MainSearchView(
             viewModel.setSearchQuery(query.ifBlank { null })
             searchViewModel.addToHistory(query)
             searchBar.setText(query)
-            searchBar.textCentered = query.isBlank()
             searchView.hide()
             true
         }
@@ -97,5 +94,14 @@ class MainSearchView(
                 LayoutMode.LINEAR.spanCount
             )
         )
+    }
+
+    private fun observeViewModel(lifecycleOwner: LifecycleOwner) {
+        viewModel.searchQuery.observe(lifecycleOwner) { query ->
+            searchBar.textCentered = query.isNullOrBlank()
+        }
+        searchViewModel.searchHistory.observe(lifecycleOwner) { history ->
+            searchAdapter.submitList(history)
+        }
     }
 }
