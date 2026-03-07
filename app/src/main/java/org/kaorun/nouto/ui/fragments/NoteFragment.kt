@@ -21,7 +21,7 @@ import com.onegravity.rteditor.api.format.RTFormat
 import org.kaorun.nouto.R
 import org.kaorun.nouto.data.Note
 import org.kaorun.nouto.databinding.FragmentNoteBinding
-import org.kaorun.nouto.ui.utils.FloatingToolbarHelper
+import org.kaorun.nouto.ui.components.TextStyleFloatingToolbar
 import org.kaorun.nouto.ui.utils.InsetsHandler
 import org.kaorun.nouto.viewmodel.NotesViewModel
 
@@ -90,14 +90,14 @@ class NoteFragment : BaseFragment(R.layout.fragment_note) {
     }
 
     private fun setupToolbar() {
-        val floatingToolbarHelper = FloatingToolbarHelper(
+        val textStyleFloatingToolbar = TextStyleFloatingToolbar(
             rtManager,
             binding.styleBold,
             binding.styleItalic,
             binding.styleUnderline,
             listOf(binding.noteTitle, binding.noteContent)
         )
-        floatingToolbarHelper.setupFloatingToolbar()
+        textStyleFloatingToolbar.setupFloatingToolbar()
     }
 
     private fun setupListeners() {

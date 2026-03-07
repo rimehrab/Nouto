@@ -102,7 +102,10 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
 
         navigationView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.settings -> sideSheetDialog.hide()
+                R.id.settings -> {
+                    sideSheetDialog.hide()
+                    openSettingsFragment()
+                }
                 else -> sideSheetDialog.hide()
             }
             true
@@ -145,7 +148,10 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
             }
         }
 
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, searchResetCallback)
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            searchResetCallback
+        )
 
         viewModel.searchQuery.observe(viewLifecycleOwner) { query ->
             searchResetCallback.isEnabled = !query.isNullOrBlank()
@@ -167,6 +173,13 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
         TransitionManager.endTransitions(binding.root.parent as ViewGroup)
         findNavController().navigate(
             MainFragmentDirections.actionMainFragmentToNoteFragment(noteId ?: -1)
+        )
+    }
+
+    private fun openSettingsFragment() {
+        TransitionManager.endTransitions(binding.root.parent as ViewGroup)
+        findNavController().navigate(
+            MainFragmentDirections.actionMainFragmentToSettingsFragment()
         )
     }
 

@@ -44,4 +44,12 @@
         <item name="cornerFamily">?attr/shapeCornerFamily</item>
         <item name="cornerSize">?attr/shapeCornerSizeLargeIncreased</item>
     </style>
+
+    <style name="PreferenceThemeOverlay.v14.Material" tools:override="true">
+        <item name="preferenceStyle">@style/MyPreferenceItem</item>
+    </style>
+
+    <style name="MyPreferenceItem" parent="Preference">
+        <item name="android:layout">@layout/item_preference</item>
+    </style>
 </resources>

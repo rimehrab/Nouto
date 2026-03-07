@@ -8,7 +8,8 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 class MarginItemDecoration(
     private val outerSpaceSize: Int,
     private val innerSpaceSize: Int,
-    private val spanCount: Int
+    private val spanCount: Int,
+    private val isTopMargin: Boolean = true
 ) : RecyclerView.ItemDecoration() {
 
     override fun getItemOffsets(
@@ -20,7 +21,9 @@ class MarginItemDecoration(
         val column = layoutParams?.spanIndex ?: (position % spanCount)
         val itemCount = state.itemCount
 
-        outRect.top = if (position < spanCount) outerSpaceSize else innerSpaceSize
+        outRect.top = if (position < spanCount) {
+            if (isTopMargin) outerSpaceSize else 0
+        } else innerSpaceSize
         outRect.left = if (column == 0) outerSpaceSize else innerSpaceSize / 2
         outRect.right = if (column == spanCount - 1) outerSpaceSize else innerSpaceSize / 2
         outRect.bottom = if (position >= itemCount - spanCount) outerSpaceSize else 0

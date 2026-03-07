@@ -1,0 +1,15 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <Preference
+        android:key="screen_appearance"
+        android:icon="@drawable/palette_24px"
+        android:title="@string/appearance"
+        android:summary="@string/appearance_summary" />
+
+    <Preference
+        android:key="screen_about"
+        android:icon="@drawable/info_24px"
+        android:title="@string/about"
+        android:summary="@string/about_summary" />
+
+</PreferenceScreen>

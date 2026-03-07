@@ -1,4 +1,4 @@
-package org.kaorun.nouto.ui.utils
+package org.kaorun.nouto.ui.components
 
 import android.graphics.Typeface
 import android.text.style.StyleSpan
@@ -12,7 +12,7 @@ import com.onegravity.rteditor.effects.Effect
 import com.onegravity.rteditor.effects.Effects
 import com.onegravity.rteditor.spans.RTSpan
 
-class FloatingToolbarHelper(
+class TextStyleFloatingToolbar(
     private val rtManager: RTManager,
     private val styleBold: MaterialButton,
     private val styleItalic: MaterialButton,
