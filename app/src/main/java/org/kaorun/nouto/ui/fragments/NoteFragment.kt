@@ -54,9 +54,9 @@ class NoteFragment : BaseFragment(R.layout.fragment_note) {
         setupRtEditor(savedInstanceState)
         setupNote()
         setupInsets()
-        showKeyboard()
         setupToolbar()
         setupListeners()
+        showKeyboard()
     }
 
     private fun setupRtEditor(savedInstanceState: Bundle?) {
@@ -155,8 +155,21 @@ class NoteFragment : BaseFragment(R.layout.fragment_note) {
             isBottomPaddingEnabled = false
         )
         InsetsHandler.applyViewInsets(binding.contentContainer, false)
-        InsetsHandler.applyImeInsets(binding.floatingToolbar)
         InsetsHandler.applyImeInsets(binding.scrollView)
+
+        (enterTransition as? androidx.transition.Transition)?.addListener(
+            object : androidx.transition.Transition.TransitionListener {
+                override fun onTransitionEnd(transition: androidx.transition.Transition) {
+                    InsetsHandler.applyImeInsets(binding.floatingToolbar)
+                }
+                override fun onTransitionStart(transition: androidx.transition.Transition) {}
+                override fun onTransitionCancel(transition: androidx.transition.Transition) {
+                    InsetsHandler.applyImeInsets(binding.floatingToolbar)
+                }
+                override fun onTransitionPause(transition: androidx.transition.Transition) {}
+                override fun onTransitionResume(transition: androidx.transition.Transition) {}
+            }
+        ) ?: InsetsHandler.applyImeInsets(binding.floatingToolbar)
     }
 
     private fun saveNote() {
@@ -178,19 +191,22 @@ class NoteFragment : BaseFragment(R.layout.fragment_note) {
     }
 
     private fun showKeyboard() {
-        (enterTransition as? androidx.transition.Transition)?.addListener(
-            object : androidx.transition.Transition.TransitionListener {
-                override fun onTransitionEnd(transition: androidx.transition.Transition) {
-                    binding.noteTitle.requestFocus()
-                    WindowCompat.getInsetsController(requireActivity().window, binding.noteTitle)
-                        .show(WindowInsetsCompat.Type.ime())
-                }
-                override fun onTransitionStart(transition: androidx.transition.Transition) {}
-                override fun onTransitionCancel(transition: androidx.transition.Transition) {}
-                override fun onTransitionPause(transition: androidx.transition.Transition) {}
-                override fun onTransitionResume(transition: androidx.transition.Transition) {}
-            }
-        )
+        binding.noteTitle.requestFocus()
+        WindowCompat.getInsetsController(requireActivity().window, binding.noteTitle)
+            .show(WindowInsetsCompat.Type.ime())
+//        (enterTransition as? androidx.transition.Transition)?.addListener(
+//            object : androidx.transition.Transition.TransitionListener {
+//                override fun onTransitionEnd(transition: androidx.transition.Transition) {
+//                    binding.noteTitle.requestFocus()
+//                    WindowCompat.getInsetsController(requireActivity().window, binding.noteTitle)
+//                        .show(WindowInsetsCompat.Type.ime())
+//                }
+//                override fun onTransitionStart(transition: androidx.transition.Transition) {}
+//                override fun onTransitionCancel(transition: androidx.transition.Transition) {}
+//                override fun onTransitionPause(transition: androidx.transition.Transition) {}
+//                override fun onTransitionResume(transition: androidx.transition.Transition) {}
+//            }
+//        )
     }
 
     private fun closeNoteFragment() {

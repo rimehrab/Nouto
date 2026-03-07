@@ -11,6 +11,7 @@ import com.google.android.material.search.SearchBar
 import com.google.android.material.search.SearchView
 import org.kaorun.nouto.R
 import org.kaorun.nouto.ui.adapter.SearchAdapter
+import org.kaorun.nouto.ui.model.LayoutMode
 import org.kaorun.nouto.ui.utils.MarginItemDecoration
 import org.kaorun.nouto.viewmodel.NotesViewModel
 import org.kaorun.nouto.viewmodel.SearchViewModel
@@ -50,7 +51,7 @@ class MainSearchView(
                     backCallback.isEnabled = true
                     fab.hide()
                 }
-                SearchView.TransitionState.HIDDEN -> {
+                SearchView.TransitionState.HIDING -> {
                     backCallback.isEnabled = false
                     fab.show()
                 }
@@ -93,7 +94,7 @@ class MainSearchView(
                 resources.getDimensionPixelSize(
                     R.dimen.recycler_view_segmented_list_margin
                 ),
-                1
+                LayoutMode.LINEAR.spanCount
             )
         )
     }
