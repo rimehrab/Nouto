@@ -5,6 +5,7 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowInsetsController
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -97,6 +98,15 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
             setSheetEdge(Gravity.START)
         }
 
+        sideSheetDialog.window?.let { window ->
+            val activityAppearance = requireActivity().window.insetsController
+                ?.systemBarsAppearance ?: 0
+            window.insetsController?.setSystemBarsAppearance(
+                activityAppearance,
+                WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
+            )
+        }
+
         val navigationView =
             sideSheetDialog.findViewById<NavigationView>(R.id.navigation_view)!!
         InsetsHandler.applyViewInsets(navigationView)
@@ -104,10 +114,10 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
         navigationView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.settings -> {
-                    sideSheetDialog.hide()
+                    sideSheetDialog.dismiss()
                     openSettingsFragment()
                 }
-                else -> sideSheetDialog.hide()
+                else -> sideSheetDialog.dismiss()
             }
             true
         }
@@ -182,6 +192,7 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
         findNavController().navigate(
             MainFragmentDirections.actionMainFragmentToSettingsMainFragment()
         )
+        binding.fab.hide()
     }
 
     private fun setupLayoutMode() {

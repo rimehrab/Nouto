@@ -15,6 +15,7 @@
         android:key="dynamic_colors"
         android:icon="@drawable/colors_24px"
         android:title="Dynamic colors"
-        android:summary="Colors based on your wallpaper" />
+        android:summary="Colors based on your wallpaper"
+        android:defaultValue="true" />
 
 </PreferenceScreen>
