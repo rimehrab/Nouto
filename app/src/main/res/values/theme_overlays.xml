@@ -3,4 +3,8 @@
     <style name="ThemeOverlay.CircleNavigationButton" parent="ThemeOverlay.Material3.Toolbar.CircleNavigationButton">
         <item name="toolbarNavigationButtonCircleColor">?colorSurfaceContainerHighest</item>
     </style>
+
+    <style name="ThemeOverlay.MaterialAlertDialog" parent="ThemeOverlay.Material3Expressive.MaterialAlertDialog.Centered">
+        <item name="buttonBarPositiveButtonStyle">@style/Widget.Material3Expressive.Button</item>
+    </style>
 </resources>

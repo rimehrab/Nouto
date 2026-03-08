@@ -37,8 +37,8 @@
                 app:titleMarginStart="8dp"
                 app:layout_collapseMode="pin"
                 app:navigationIcon="@drawable/arrow_back_24px"
-                app:title="@string/settings"
-                tools:ignore="RtlSymmetry" />
+                tools:ignore="RtlSymmetry"
+                tools:title="@string/settings" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 

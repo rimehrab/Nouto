@@ -1,26 +1,34 @@
-package org.kaorun.nouto.ui.fragments
+package org.kaorun.nouto.ui.fragments.base
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import androidx.preference.PreferenceFragmentCompat
+import androidx.transition.TransitionManager
 import org.kaorun.nouto.R
 import org.kaorun.nouto.databinding.FragmentSettingsBinding
 import org.kaorun.nouto.ui.utils.InsetsHandler
 
-class SettingsFragment : BaseFragment(R.id.settingsFragment) {
+abstract class SettingsBaseFragment : BaseFragment(R.layout.fragment_settings) {
     private var _binding: FragmentSettingsBinding? = null
-    private val binding get() = _binding!!
+    protected val binding get() = _binding!!
+
+    abstract val titleRes: Int
+    abstract fun preferenceFragment(): PreferenceFragmentCompat
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        exitTransition = fadeAnimation(false)
+        reenterTransition = fadeAnimation(true)
         enterTransition = slideAnimation(true)
         returnTransition = slideAnimation(false)
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentSettingsBinding.inflate(inflater, container, false)
@@ -36,13 +44,15 @@ class SettingsFragment : BaseFragment(R.id.settingsFragment) {
             isBottomPaddingEnabled = false
         )
 
+        binding.toolbar.title = getString(titleRes)
         binding.toolbar.setNavigationOnClickListener {
-            findNavController().navigateUp()
+            TransitionManager.endTransitions(binding.root.parent as ViewGroup)
+            findNavController().popBackStack()
         }
 
         if (savedInstanceState == null) {
             childFragmentManager.beginTransaction()
-                .replace(R.id.preference_container, SettingsMainFragment())
+                .replace(R.id.preference_container, preferenceFragment())
                 .commit()
         }
     }

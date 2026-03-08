@@ -46,10 +46,16 @@
     </style>
 
     <style name="PreferenceThemeOverlay.v14.Material" tools:override="true">
-        <item name="preferenceStyle">@style/MyPreferenceItem</item>
+        <item name="preferenceStyle">@style/SegmentedListPreferenceItem</item>
+        <item name="dialogPreferenceStyle">@style/SegmentedListPreferenceItem</item>
+        <item name="switchPreferenceCompatStyle">@style/SegmentedListSwitchPreferenceItem</item>
     </style>
 
-    <style name="MyPreferenceItem" parent="Preference">
+    <style name="SegmentedListPreferenceItem" parent="Preference">
+        <item name="android:layout">@layout/item_preference</item>
+    </style>
+
+    <style name="SegmentedListSwitchPreferenceItem" parent="Preference.SwitchPreferenceCompat">
         <item name="android:layout">@layout/item_preference</item>
     </style>
 </resources>

@@ -22,6 +22,7 @@ import org.kaorun.nouto.R
 import org.kaorun.nouto.data.Note
 import org.kaorun.nouto.databinding.FragmentNoteBinding
 import org.kaorun.nouto.ui.components.TextStyleFloatingToolbar
+import org.kaorun.nouto.ui.fragments.base.BaseFragment
 import org.kaorun.nouto.ui.utils.InsetsHandler
 import org.kaorun.nouto.viewmodel.NotesViewModel
 

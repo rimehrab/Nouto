@@ -18,6 +18,7 @@ import org.kaorun.nouto.R
 import org.kaorun.nouto.databinding.FragmentMainBinding
 import org.kaorun.nouto.ui.adapter.NoteAdapter
 import org.kaorun.nouto.ui.components.MainSearchView
+import org.kaorun.nouto.ui.fragments.base.BaseFragment
 import org.kaorun.nouto.ui.model.LayoutMode
 import org.kaorun.nouto.ui.utils.InsetsHandler
 import org.kaorun.nouto.ui.utils.MarginItemDecoration
@@ -179,7 +180,7 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
     private fun openSettingsFragment() {
         TransitionManager.endTransitions(binding.root.parent as ViewGroup)
         findNavController().navigate(
-            MainFragmentDirections.actionMainFragmentToSettingsFragment()
+            MainFragmentDirections.actionMainFragmentToSettingsMainFragment()
         )
     }
 

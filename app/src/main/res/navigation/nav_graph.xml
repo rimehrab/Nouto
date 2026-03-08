@@ -14,8 +14,8 @@
             android:id="@+id/action_mainFragment_to_noteFragment"
             app:destination="@id/noteFragment" />
         <action
-            android:id="@+id/action_mainFragment_to_settingsFragment"
-            app:destination="@id/settingsFragment" />
+            android:id="@+id/action_mainFragment_to_settingsMainFragment"
+            app:destination="@id/settingsMainFragment" />
     </fragment>
 
     <fragment
@@ -29,8 +29,16 @@
             android:defaultValue="-1" />
     </fragment>
     <fragment
-        android:id="@+id/settingsFragment"
-        android:name="org.kaorun.nouto.ui.fragments.SettingsFragment"
-        android:label="SettingsFragment" />
+        android:id="@+id/settingsMainFragment"
+        android:name="org.kaorun.nouto.ui.fragments.settings.SettingsMainFragment"
+        android:label="SettingsFragment" >
+        <action
+            android:id="@+id/action_settingsMainFragment_to_settingsAppearanceFragment"
+            app:destination="@id/settingsAppearanceFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsAppearanceFragment"
+        android:name="org.kaorun.nouto.ui.fragments.settings.SettingsAppearanceFragment"
+        android:label="SettingsAppearanceFragment" />
 
 </navigation>

@@ -4,5 +4,6 @@
 
     <style name="Theme.Nouto" parent="Base.Theme.Nouto">
         <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
+        <item name="materialAlertDialogTheme">@style/ThemeOverlay.MaterialAlertDialog</item>
     </style>
 </resources>
