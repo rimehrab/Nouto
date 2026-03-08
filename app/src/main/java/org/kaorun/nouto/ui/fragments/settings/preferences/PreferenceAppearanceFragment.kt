@@ -1,7 +1,6 @@
 package org.kaorun.nouto.ui.fragments.settings.preferences
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.preference.ListPreference
 import androidx.preference.SwitchPreferenceCompat
 import org.kaorun.nouto.R

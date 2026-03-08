@@ -4,11 +4,9 @@ import android.os.Bundle
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.preference.Preference
-import androidx.preference.SwitchPreferenceCompat
 import androidx.transition.TransitionManager
 import org.kaorun.nouto.R
 import org.kaorun.nouto.ui.fragments.base.PreferenceBaseFragment
-import org.kaorun.nouto.ui.utils.ColorThemeHelper
 
 class PreferenceMainFragment : PreferenceBaseFragment() {
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {

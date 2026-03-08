@@ -1,7 +1,6 @@
 package org.kaorun.nouto.ui.utils
 
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.preference.PreferenceManager
 
