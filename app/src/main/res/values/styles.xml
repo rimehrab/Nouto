@@ -5,10 +5,6 @@
         <item name="cardBackgroundColor">@color/segmented_list_item_background</item>
     </style>
 
-    <style name="Widget.Material3.ListItemCardView.Segmented.Dim" parent="Widget.Material3.ListItemCardView.Segmented">
-        <item name="cardBackgroundColor">@color/segmented_list_item_background_dim</item>
-    </style>
-
 
     <style name="ShapeAppearance.Material3.ListItem.First" parent="" tools:override="true">
         <item name="cornerFamily">?attr/shapeCornerFamily</item>
