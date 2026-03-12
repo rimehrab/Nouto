@@ -69,7 +69,6 @@ object InsetsHandler {
 
                 override fun onPrepare(animation: WindowInsetsAnimationCompat) {
                     startBottom = view.bottom.toFloat()
-                    android.util.Log.d("IME", "onPrepare isLaidOut=${view.isLaidOut} bottom=${view.bottom} translationY=${view.translationY}")
                 }
 
                 override fun onStart(
@@ -77,7 +76,6 @@ object InsetsHandler {
                     bounds: WindowInsetsAnimationCompat.BoundsCompat
                 ): WindowInsetsAnimationCompat.BoundsCompat {
                     endBottom = view.bottom.toFloat()
-                    android.util.Log.d("IME", "onStart bottom=${view.bottom}")
                     return bounds
                 }
 
@@ -90,7 +88,6 @@ object InsetsHandler {
                     } ?: return insets
 
                     val translation = (startBottom - endBottom) * (1 - imeAnimation.interpolatedFraction)
-                    android.util.Log.d("IME", "fraction=${imeAnimation.interpolatedFraction} translation=$translation")
                     view.translationY = translation
 
                     return insets

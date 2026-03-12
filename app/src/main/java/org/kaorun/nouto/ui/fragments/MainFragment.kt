@@ -1,5 +1,6 @@
 package org.kaorun.nouto.ui.fragments
 
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.view.Gravity
@@ -93,7 +94,6 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
 
     private fun setupSideSheet() {
         val sideSheetDialog = SideSheetDialog(requireContext())
-
         with(sideSheetDialog) {
             setContentView(R.layout.side_sheet)
             setFitsSystemWindows(false)
@@ -102,6 +102,11 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
         }
 
         sideSheetDialog.window?.let { window ->
+            @Suppress("DEPRECATION")
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.VANILLA_ICE_CREAM) {
+                window.navigationBarColor = Color.TRANSPARENT
+                window.statusBarColor = Color.TRANSPARENT
+            }
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                 val activityAppearance = requireActivity().window.insetsController
                     ?.systemBarsAppearance ?: 0
@@ -143,6 +148,11 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
             isBottomPaddingEnabled = false
         )
         InsetsHandler.applyViewInsets(binding.recyclerView, false)
+        InsetsHandler.applyViewInsets(
+            binding.searchRecyclerView,
+            isTopPaddingEnabled = false,
+            isBottomPaddingEnabled = false
+        )
         InsetsHandler.applyViewInsets(binding.fab, fabMargin)
     }
 
@@ -156,7 +166,6 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
                 binding.navigationButton.setOnClickListener {
                     viewModel.setSearchQuery(null)
                     binding.searchBar.clearText()
-                    binding.searchBar.textCentered = true
                 }
             }
         }
