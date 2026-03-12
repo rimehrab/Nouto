@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="outline_variant">@color/material_dynamic_neutral_variant80</color>
-    <color name="surface">@color/material_dynamic_neutral95</color>
 
     <!-- Default theme -->
     <color name="md_theme_primary">#415F91</color>

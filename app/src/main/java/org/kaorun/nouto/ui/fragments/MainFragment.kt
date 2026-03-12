@@ -1,5 +1,6 @@
 package org.kaorun.nouto.ui.fragments
 
+import android.os.Build
 import android.os.Bundle
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -7,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowInsetsController
 import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
@@ -99,12 +102,21 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
         }
 
         sideSheetDialog.window?.let { window ->
-            val activityAppearance = requireActivity().window.insetsController
-                ?.systemBarsAppearance ?: 0
-            window.insetsController?.setSystemBarsAppearance(
-                activityAppearance,
-                WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
-            )
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                val activityAppearance = requireActivity().window.insetsController
+                    ?.systemBarsAppearance ?: 0
+                window.insetsController?.setSystemBarsAppearance(
+                    activityAppearance,
+                    WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
+                )
+            } else {
+                val isLightMode =
+                    AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_NO
+                WindowInsetsControllerCompat(
+                    window,
+                    window.decorView
+                ).isAppearanceLightStatusBars = isLightMode
+            }
         }
 
         val navigationView =
@@ -155,7 +167,6 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
             override fun handleOnBackPressed() {
                 viewModel.setSearchQuery(null)
                 binding.searchBar.clearText()
-                binding.searchBar.textCentered = true
             }
         }
 

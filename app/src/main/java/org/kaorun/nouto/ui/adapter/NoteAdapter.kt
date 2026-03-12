@@ -1,12 +1,17 @@
 package org.kaorun.nouto.ui.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.listitem.ListItemViewHolder
 import org.kaorun.nouto.data.Note
 import org.kaorun.nouto.databinding.ItemNoteBinding
+import com.google.android.material.listitem.ListItemCardView.SwipeCallback
+import com.google.android.material.listitem.RevealableListItem
+import com.google.android.material.listitem.SwipeableListItem.STATE_SWIPE_PRIMARY_ACTION
 
 class NoteAdapter(
     private val onItemClick: (Note) -> Unit,
@@ -22,6 +27,21 @@ class NoteAdapter(
                 (if (note.title.isNullOrBlank()) note.content else note.title)!!,
                 HtmlCompat.FROM_HTML_MODE_COMPACT
             )
+
+
+            binding.cardView.addSwipeCallback(object: SwipeCallback() {
+                override fun onSwipe(p0: Int) {}
+
+                override fun <T> onSwipeStateChanged(
+                    newState: Int,
+                    activeRevealableListItem: T,
+                    gravity: Int
+                ) where T : View, T : RevealableListItem {
+                    if (newState == STATE_SWIPE_PRIMARY_ACTION &&
+                        bindingAdapterPosition != RecyclerView.NO_POSITION) { onDeleteClick(note) }
+                }
+
+            })
             binding.cardView.setOnClickListener { onItemClick(note) }
             binding.buttonDelete.setOnClickListener { onDeleteClick(note) }
         }

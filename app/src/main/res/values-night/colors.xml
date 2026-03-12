@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="outline_variant">@color/material_dynamic_neutral_variant30</color>
-    <color name="surface">?colorSurfaceDim</color>
 
     <!-- default theme -->
     <color name="md_theme_primary">#AAC7FF</color>

@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <style name="SearchView">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">28dp</item>
-    </style>
 
     <style name="Widget.Material3.ListItemCardView.Segmented" parent="" tools:override="true">
         <item name="cardBackgroundColor">@color/segmented_list_item_background</item>

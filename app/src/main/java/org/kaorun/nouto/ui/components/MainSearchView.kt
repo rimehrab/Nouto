@@ -25,7 +25,7 @@ class MainSearchView(
     private val searchViewModel: SearchViewModel,
     private val resources: Resources,
     private val activity: FragmentActivity,
-    lifecycleOwner: LifecycleOwner
+    private val lifecycleOwner: LifecycleOwner
 ) {
     private lateinit var searchAdapter: SearchAdapter
     private val backCallback = object : OnBackPressedCallback(false) {
@@ -36,13 +36,19 @@ class MainSearchView(
 
     init {
         searchView.setupWithSearchBar(searchBar)
-        activity.onBackPressedDispatcher.addCallback(lifecycleOwner, backCallback)
-        setupRecyclerView()
-        setupSearchView()
         observeViewModel(lifecycleOwner)
+        setupSearchView()
+        setupRecyclerView()
+    }
+
+    private fun observeViewModel(lifecycleOwner: LifecycleOwner) {
+        searchViewModel.searchHistory.observe(lifecycleOwner) { history ->
+            searchAdapter.submitList(history)
+        }
     }
 
     private fun setupSearchView() {
+        activity.onBackPressedDispatcher.addCallback(lifecycleOwner, backCallback)
         searchView.addTransitionListener { _, _, newState ->
             when (newState) {
                 SearchView.TransitionState.SHOWING -> {
@@ -59,10 +65,8 @@ class MainSearchView(
 
         searchView.editText.setOnEditorActionListener { textView, _, _ ->
             val query = textView.text.toString().trim()
-            viewModel.setSearchQuery(query.ifBlank { null })
+            submitSearchQuery(query)
             searchViewModel.addToHistory(query)
-            searchBar.setText(query)
-            searchView.hide()
             true
         }
     }
@@ -70,9 +74,7 @@ class MainSearchView(
     private fun setupRecyclerView() {
         searchAdapter = SearchAdapter(
             onItemClick = { query ->
-                viewModel.setSearchQuery(query)
-                searchBar.setText(query)
-                searchView.hide()
+                submitSearchQuery(query)
             },
             onDeleteClick = { query ->
                 searchViewModel.removeFromHistory(query)
@@ -96,12 +98,14 @@ class MainSearchView(
         )
     }
 
-    private fun observeViewModel(lifecycleOwner: LifecycleOwner) {
-        viewModel.searchQuery.observe(lifecycleOwner) { query ->
-            searchBar.textCentered = query.isNullOrBlank()
-        }
-        searchViewModel.searchHistory.observe(lifecycleOwner) { history ->
-            searchAdapter.submitList(history)
-        }
+    private fun submitSearchQuery(
+        query: String,
+        searchBar: SearchBar = this.searchBar,
+        searchView: SearchView = this.searchView
+    ) {
+        viewModel.setSearchQuery(query)
+        searchBar.setText(query)
+        searchView.setText(query)
+        searchView.hide()
     }
 }
