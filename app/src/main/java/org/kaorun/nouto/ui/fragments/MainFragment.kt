@@ -21,7 +21,9 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.transition.TransitionManager
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.sidesheet.SideSheetDialog
+import com.google.android.material.snackbar.Snackbar
 import org.kaorun.nouto.R
+import org.kaorun.nouto.data.Note
 import org.kaorun.nouto.databinding.FragmentMainBinding
 import org.kaorun.nouto.ui.adapter.NoteAdapter
 import org.kaorun.nouto.ui.components.MainSearchView
@@ -78,8 +80,10 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
 
     private fun setupRecyclerView() {
         noteAdapter = NoteAdapter(
-            onItemClick = {note -> openNoteFragment(note.id)},
-            onDeleteClick = {note -> viewModel.deleteNote(note)}
+            onItemClick = { note -> openNoteFragment(note.id) },
+            onDeleteClick = { note ->
+                setupSnackbar(note)
+            }
         )
         binding.recyclerView.adapter = noteAdapter
     }
@@ -202,6 +206,13 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
             requireActivity(),
             viewLifecycleOwner
         )
+    }
+
+    private fun setupSnackbar(note: Note) {
+        viewModel.deleteNote(note)
+        Snackbar.make(binding.root, R.string.note_deleted_message, Snackbar.LENGTH_SHORT)
+            .setAnchorView(binding.fab)
+            .show()
     }
 
     private fun openNoteFragment(noteId: Int?) {

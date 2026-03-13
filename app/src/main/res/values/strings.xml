@@ -26,4 +26,5 @@
     <string name="cancel">Cancel</string>
     <string name="notes_empty">You don\'t have any notes yet</string>
     <string name="nothing_found">Nothing found in your notes</string>
+    <string name="note_deleted_message">Note has been deleted</string>
 </resources>
