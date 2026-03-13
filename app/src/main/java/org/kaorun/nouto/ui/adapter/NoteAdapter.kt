@@ -1,6 +1,5 @@
 package org.kaorun.nouto.ui.adapter
 
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +11,6 @@ import org.kaorun.nouto.data.Note
 import org.kaorun.nouto.databinding.ItemNoteBinding
 import com.google.android.material.listitem.ListItemCardView.SwipeCallback
 import com.google.android.material.listitem.RevealableListItem
-import com.google.android.material.listitem.SwipeableListItem
 import com.google.android.material.listitem.SwipeableListItem.STATE_SWIPE_PRIMARY_ACTION
 
 class NoteAdapter(
@@ -47,13 +45,6 @@ class NoteAdapter(
                 HtmlCompat.FROM_HTML_MODE_COMPACT
             )
         }
-
-        fun closeSwipe() {
-            val swipeable = binding.root
-            binding.cardView.animate().cancel()
-            swipeable.setSwipeState(SwipeableListItem.STATE_CLOSED, Gravity.START)
-            swipeable.setSwipeState(SwipeableListItem.STATE_CLOSED, Gravity.END)
-        }
     }
 
     override fun onCreateViewHolder(
@@ -74,10 +65,5 @@ class NoteAdapter(
     ) {
         holder.bind(getItem(position))
         holder.bind(position, itemCount)
-    }
-
-    override fun onViewRecycled(holder: NoteViewHolder) {
-        super.onViewRecycled(holder)
-        holder.closeSwipe()
     }
 }
