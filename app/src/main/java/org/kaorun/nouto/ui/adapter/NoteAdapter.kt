@@ -17,33 +17,33 @@ class NoteAdapter(
     private val onItemClick: (Note) -> Unit,
     private val onDeleteClick: (Note) -> Unit
 ) : ListAdapter<Note, NoteAdapter.NoteViewHolder>(NoteDiffCallback()) {
-    class NoteViewHolder(
-        private val binding: ItemNoteBinding,
-        private val onItemClick: (Note) -> Unit,
-        private val onDeleteClick: (Note) -> Unit
+    inner class NoteViewHolder(
+        private val binding: ItemNoteBinding
     ) : ListItemViewHolder(binding.root) {
-        fun bind(note: Note) {
-            binding.noteTitle.text = HtmlCompat.fromHtml(
-                (if (note.title.isNullOrBlank()) note.content else note.title)!!,
-                HtmlCompat.FROM_HTML_MODE_COMPACT
-            )
+        private lateinit var note: Note
 
-
-            binding.cardView.addSwipeCallback(object: SwipeCallback() {
+        init {
+            binding.cardView.addSwipeCallback(object : SwipeCallback() {
                 override fun onSwipe(p0: Int) {}
-
                 override fun <T> onSwipeStateChanged(
                     newState: Int,
                     activeRevealableListItem: T,
                     gravity: Int
                 ) where T : View, T : RevealableListItem {
                     if (newState == STATE_SWIPE_PRIMARY_ACTION &&
-                        bindingAdapterPosition != RecyclerView.NO_POSITION) { onDeleteClick(note) }
+                        bindingAdapterPosition != RecyclerView.NO_POSITION) onDeleteClick(note)
                 }
-
             })
             binding.cardView.setOnClickListener { onItemClick(note) }
             binding.buttonDelete.setOnClickListener { onDeleteClick(note) }
+        }
+
+        fun bind(currentNote: Note) {
+            note = currentNote
+            binding.noteTitle.text = HtmlCompat.fromHtml(
+                (if (note.title.isNullOrBlank()) note.content else note.title)!!,
+                HtmlCompat.FROM_HTML_MODE_COMPACT
+            )
         }
     }
 
@@ -56,7 +56,7 @@ class NoteAdapter(
             parent,
             false
         )
-        return NoteViewHolder(binding, onItemClick, onDeleteClick)
+        return NoteViewHolder(binding)
     }
 
     override fun onBindViewHolder(
