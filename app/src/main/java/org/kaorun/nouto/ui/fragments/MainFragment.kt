@@ -11,6 +11,8 @@ import android.view.WindowInsetsController
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.WindowInsetsControllerCompat
+import androidx.core.view.isInvisible
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
@@ -65,10 +67,12 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
     private fun observeNotes() {
         viewModel.displayedNotes.observe(viewLifecycleOwner) { notes ->
             noteAdapter.submitList(notes) {
-                binding.recyclerView.post {
-                    binding.recyclerView.invalidateItemDecorations()
-                }
+                binding.recyclerView.post { binding.recyclerView.invalidateItemDecorations() }
             }
+            val isSearching = !viewModel.searchQuery.value.isNullOrBlank()
+            binding.recyclerView.isInvisible = notes.isEmpty() && isSearching
+            binding.notesEmptyLayout.root.isVisible = notes.isEmpty() && !isSearching
+            binding.nothingFoundLayout.root.isVisible = notes.isEmpty() && isSearching
         }
     }
 
