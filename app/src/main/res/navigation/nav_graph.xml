@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_mainFragment_to_settingsMainFragment"
             app:destination="@id/settingsMainFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_recentlyDeletedFragment"
+            app:destination="@id/recentlyDeletedFragment" />
     </fragment>
 
     <fragment
@@ -40,5 +43,9 @@
         android:id="@+id/settingsAppearanceFragment"
         android:name="org.kaorun.nouto.ui.fragments.settings.SettingsAppearanceFragment"
         android:label="SettingsAppearanceFragment" />
+    <fragment
+        android:id="@+id/recentlyDeletedFragment"
+        android:name="org.kaorun.nouto.ui.fragments.RecentlyDeletedFragment"
+        android:label="RecentlyDeletedFragment" />
 
 </navigation>

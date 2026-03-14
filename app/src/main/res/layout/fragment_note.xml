@@ -114,9 +114,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 tools:ignore="TextContrastCheck,VisualLintTextFieldSize" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
-
     </androidx.core.widget.NestedScrollView>
 
     <com.google.android.material.floatingtoolbar.FloatingToolbarLayout
@@ -164,9 +162,6 @@
                 android:checkable="true"
                 android:contentDescription="@string/underline_style_description"
                 app:icon="@drawable/format_underlined_24px" />
-
         </LinearLayout>
-
     </com.google.android.material.floatingtoolbar.FloatingToolbarLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

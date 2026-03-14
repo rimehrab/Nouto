@@ -40,9 +40,6 @@
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/search_delete_button_description"
                 app:icon="@drawable/close_24px" />
-
         </LinearLayout>
-
     </com.google.android.material.listitem.ListItemCardView>
-
 </com.google.android.material.listitem.ListItemLayout>

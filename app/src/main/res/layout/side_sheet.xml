@@ -19,5 +19,4 @@
         app:itemTextAppearance="?textAppearanceBodyMedium"
         app:itemTextAppearanceActiveBoldEnabled="true"
         app:headerLayout="@layout/header_navigation_drawer" />
-
 </FrameLayout>

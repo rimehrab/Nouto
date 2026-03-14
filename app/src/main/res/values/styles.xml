@@ -50,4 +50,14 @@
     <style name="SegmentedListSwitchPreferenceItem" parent="Preference.SwitchPreferenceCompat">
         <item name="android:layout">@layout/item_preference</item>
     </style>
+
+
+    <style name="Widget.Material3Expressive.FloatingActionButton.Large.Error" parent="Widget.Material3Expressive.FloatingActionButton.Large">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.Material3Expressive.FloatingActionButton.Error</item>
+    </style>
+
+    <style name="ButtonDialogNegative" parent="Widget.Material3Expressive.Button.OutlinedButton">
+        <item name="android:layout_marginEnd">8dp</item>
+        <item name="android:textColor">?colorError</item>
+    </style>
 </resources>

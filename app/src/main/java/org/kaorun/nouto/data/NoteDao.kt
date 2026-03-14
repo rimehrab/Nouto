@@ -9,13 +9,16 @@ import androidx.room.Update
 
 @Dao
 interface NoteDao {
-    @Query("SELECT * FROM notes ORDER BY time DESC")
+    @Query("SELECT * FROM notes WHERE isDeleted = 0 ORDER BY time DESC")
     fun getAllNotes(): LiveData<List<Note>>
+
+    @Query("SELECT * FROM notes WHERE isDeleted = 1 ORDER BY time DESC")
+    fun getDeletedNotes(): LiveData<List<Note>>
 
     @Query("SELECT * FROM notes WHERE id = :id LIMIT 1")
     fun getNoteById(id: Int): LiveData<Note>
 
-    @Query("SELECT * FROM notes WHERE title LIKE '%' || :query || '%' OR content LIKE '%' || :query || '%' ORDER BY time DESC")
+    @Query("SELECT * FROM notes WHERE isDeleted = 0 AND title LIKE '%' || :query || '%' OR content LIKE '%' || :query || '%' ORDER BY time DESC")
     fun searchNotes(query: String): LiveData<List<Note>>
 
     @Insert
@@ -26,4 +29,7 @@ interface NoteDao {
 
     @Delete
     suspend fun delete(note: Note)
+
+    @Delete
+    suspend fun delete(notes: List<Note>)
 }

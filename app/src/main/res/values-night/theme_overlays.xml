@@ -4,8 +4,14 @@
         <item name="toolbarNavigationButtonCircleColor">?colorSurfaceContainerHighest</item>
     </style>
 
+    <style name="ThemeOverlay.Material3Expressive.FloatingActionButton.Error" parent="">
+        <item name="colorContainer">?colorErrorContainer</item>
+        <item name="colorOnContainer">?colorOnErrorContainer</item>
+    </style>
+
     <style name="ThemeOverlay.MaterialAlertDialog" parent="ThemeOverlay.Material3Expressive.MaterialAlertDialog.Centered">
         <item name="buttonBarPositiveButtonStyle">@style/Widget.Material3Expressive.Button</item>
+        <item name="buttonBarNegativeButtonStyle">@style/ButtonDialogNegative</item>
     </style>
 
     <!-- Default theme -->

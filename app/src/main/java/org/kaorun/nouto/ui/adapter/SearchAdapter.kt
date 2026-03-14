@@ -11,10 +11,8 @@ class SearchAdapter(
     private val onDeleteClick: (String) -> Unit
 ) : ListAdapter<String, SearchAdapter.SearchViewHolder>(SearchDiffCallback()) {
 
-    class SearchViewHolder(
+    inner class SearchViewHolder(
         private val binding: ItemSearchBinding,
-        private val onItemClick: (String) -> Unit,
-        private val onDeleteClick: (String) -> Unit
     ) : ListItemViewHolder(binding.root) {
         fun bind(query: String) {
             binding.listItemText.text = query
@@ -29,7 +27,7 @@ class SearchAdapter(
             parent,
             false
         )
-        return SearchViewHolder(binding, onItemClick, onDeleteClick)
+        return SearchViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {

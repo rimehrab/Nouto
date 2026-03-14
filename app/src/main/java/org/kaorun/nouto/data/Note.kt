@@ -9,5 +9,6 @@ data class Note(
     val id: Int = 0,
     val title: String?,
     val content: String?,
-    val time: Long
+    val time: Long,
+    val isDeleted: Boolean = false
 )

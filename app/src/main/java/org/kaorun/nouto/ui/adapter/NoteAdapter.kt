@@ -1,21 +1,27 @@
 package org.kaorun.nouto.ui.adapter
 
+import android.content.res.ColorStateList
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.color.MaterialColors
 import com.google.android.material.listitem.ListItemViewHolder
 import org.kaorun.nouto.data.Note
 import org.kaorun.nouto.databinding.ItemNoteBinding
 import com.google.android.material.listitem.ListItemCardView.SwipeCallback
 import com.google.android.material.listitem.RevealableListItem
+import com.google.android.material.listitem.SwipeableListItem
 import com.google.android.material.listitem.SwipeableListItem.STATE_SWIPE_PRIMARY_ACTION
+import org.kaorun.nouto.R
 
 class NoteAdapter(
     private val onItemClick: (Note) -> Unit,
-    private val onDeleteClick: (Note) -> Unit
+    private val onDeleteClick: (Note) -> Unit,
+    private val onRestoreClick: ((Note) -> Unit)? = null
 ) : ListAdapter<Note, NoteAdapter.NoteViewHolder>(NoteDiffCallback()) {
     inner class NoteViewHolder(
         private val binding: ItemNoteBinding
@@ -31,19 +37,46 @@ class NoteAdapter(
                     gravity: Int
                 ) where T : View, T : RevealableListItem {
                     if (newState == STATE_SWIPE_PRIMARY_ACTION &&
-                        bindingAdapterPosition != RecyclerView.NO_POSITION) onDeleteClick(note)
+                        bindingAdapterPosition != RecyclerView.NO_POSITION) {
+                        if (onRestoreClick != null && gravity == Gravity.END) {
+                            onRestoreClick(note)
+                        } else {
+                            onDeleteClick(note)
+                        }
+                    }
                 }
             })
             binding.cardView.setOnClickListener { onItemClick(note) }
-            binding.buttonDelete.setOnClickListener { onDeleteClick(note) }
+            binding.buttonStart.setOnClickListener { onDeleteClick(note) }
         }
 
         fun bind(currentNote: Note) {
+            listOf(Gravity.START, Gravity.END).forEach {
+                binding.root.setSwipeState(SwipeableListItem.STATE_CLOSED, it)
+            }
             note = currentNote
             binding.noteTitle.text = HtmlCompat.fromHtml(
                 (if (note.title.isNullOrBlank()) note.content else note.title)!!,
                 HtmlCompat.FROM_HTML_MODE_COMPACT
             )
+
+            if (onRestoreClick != null) {
+                binding.buttonStart.setIconResource(R.drawable.delete_forever_24px)
+                binding.buttonEnd.setIconResource(R.drawable.restore_from_trash_24px)
+
+                binding.buttonEnd.backgroundTintList = ColorStateList.valueOf(
+                    MaterialColors.getColor(
+                        binding.buttonEnd,
+                        androidx.appcompat.R.attr.colorPrimary
+                    )
+                )
+                binding.buttonEnd.iconTint = ColorStateList.valueOf(
+                    MaterialColors.getColor(
+                        binding.buttonEnd,
+                        com.google.android.material.R.attr.colorOnPrimary
+                    )
+                )
+            }
         }
     }
 

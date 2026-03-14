@@ -13,5 +13,4 @@
         android:textAppearance="?attr/textAppearanceHeadlineSmallEmphasized"
         android:textColor="?attr/colorOnSurface"
         android:text="@string/app_name" />
-
 </LinearLayout>

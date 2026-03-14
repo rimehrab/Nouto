@@ -6,6 +6,11 @@
         android:checkable="true"
         android:checked="true" />
     <item
+        android:id="@+id/trash"
+        android:title="@string/trash"
+        android:icon="@drawable/delete_24px"
+        android:checkable="true" />
+    <item
         android:id="@+id/settings"
         android:title="@string/settings"
         android:icon="@drawable/settings_24px"

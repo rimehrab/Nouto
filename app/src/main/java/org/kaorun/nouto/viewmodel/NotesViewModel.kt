@@ -16,6 +16,7 @@ class NotesViewModel(application: Application) : AndroidViewModel(application) {
     private val _searchQuery = MutableLiveData<String?>(null)
     private val _isGridMode = MutableLiveData(false)
     private val allNotes: LiveData<List<Note>>
+    val deletedNotes: LiveData<List<Note>>
     val displayedNotes: LiveData<List<Note>>
     val searchQuery: LiveData<String?> = _searchQuery
     val isGridMode: LiveData<Boolean> = _isGridMode
@@ -24,6 +25,7 @@ class NotesViewModel(application: Application) : AndroidViewModel(application) {
         val noteDao = NoteDatabase.getDatabase(application).noteDao()
         repository = NoteRepository(noteDao)
         allNotes = repository.allNotes
+        deletedNotes = repository.deletedNotes
         displayedNotes = searchQuery.switchMap { query ->
             if (query.isNullOrBlank()) allNotes
             else repository.searchNotes(query)
@@ -69,5 +71,21 @@ class NotesViewModel(application: Application) : AndroidViewModel(application) {
 
     fun deleteNote(note: Note) {
         viewModelScope.launch { repository.delete(note) }
+    }
+
+    fun deleteNotes(notes: List<Note>) {
+        viewModelScope.launch { repository.delete(notes) }
+    }
+
+    fun markDeleted(note: Note) {
+        viewModelScope.launch {
+            repository.update(note.copy(isDeleted = true))
+        }
+    }
+
+    fun unmarkDeleted(note: Note) {
+        viewModelScope.launch {
+            repository.update(note.copy(isDeleted = false))
+        }
     }
 }

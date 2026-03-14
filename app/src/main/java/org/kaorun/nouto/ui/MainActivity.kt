@@ -7,6 +7,7 @@ import org.kaorun.nouto.R
 import org.kaorun.nouto.ui.utils.ColorThemeHelper
 import org.kaorun.nouto.ui.utils.ThemeHelper
 
+
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         ThemeHelper.apply(this)

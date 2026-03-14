@@ -6,6 +6,7 @@ import org.kaorun.nouto.data.NoteDao
 
 class NoteRepository(private val noteDao: NoteDao) {
     val allNotes: LiveData<List<Note>> = noteDao.getAllNotes()
+    val deletedNotes: LiveData<List<Note>> = noteDao.getDeletedNotes()
 
     fun getNoteById(id: Int): LiveData<Note> = noteDao.getNoteById(id)
 
@@ -16,4 +17,6 @@ class NoteRepository(private val noteDao: NoteDao) {
     suspend fun update(note: Note) = noteDao.update(note)
 
     suspend fun delete(note: Note) = noteDao.delete(note)
+
+    suspend fun delete(notes: List<Note>) = noteDao.delete(notes)
 }

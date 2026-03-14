@@ -68,7 +68,7 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
 
     private fun observeNotes() {
         viewModel.displayedNotes.observe(viewLifecycleOwner) { notes ->
-            noteAdapter.submitList(notes) {
+            noteAdapter.submitList(notes.toList()) {
                 binding.recyclerView.post { binding.recyclerView.invalidateItemDecorations() }
             }
             val isSearching = !viewModel.searchQuery.value.isNullOrBlank()
@@ -138,6 +138,10 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
 
         navigationView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
+                R.id.trash -> {
+                    sideSheetDialog.dismiss()
+                    openRecentlyDeletedFragment()
+                }
                 R.id.settings -> {
                     sideSheetDialog.dismiss()
                     openSettingsFragment()
@@ -209,9 +213,12 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
     }
 
     private fun setupSnackbar(note: Note) {
-        viewModel.deleteNote(note)
+       viewModel.markDeleted(note)
         Snackbar.make(binding.root, R.string.note_deleted_message, Snackbar.LENGTH_SHORT)
             .setAnchorView(binding.fab)
+            .setAction(R.string.undo) {
+              viewModel.unmarkDeleted(note)
+            }
             .show()
     }
 
@@ -220,6 +227,14 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
         findNavController().navigate(
             MainFragmentDirections.actionMainFragmentToNoteFragment(noteId ?: -1)
         )
+    }
+
+    private fun openRecentlyDeletedFragment() {
+        TransitionManager.endTransitions(binding.root.parent as ViewGroup)
+        findNavController().navigate(
+            MainFragmentDirections.actionMainFragmentToRecentlyDeletedFragment()
+        )
+        binding.fab.hide()
     }
 
     private fun openSettingsFragment() {
