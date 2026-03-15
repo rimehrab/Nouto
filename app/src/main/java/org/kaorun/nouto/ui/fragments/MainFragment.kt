@@ -42,12 +42,6 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
     private val searchViewModel: SearchViewModel by viewModels()
     private var layoutMode = LayoutMode.LINEAR
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        exitTransition = fadeAnimation(false)
-        reenterTransition = fadeAnimation(true)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

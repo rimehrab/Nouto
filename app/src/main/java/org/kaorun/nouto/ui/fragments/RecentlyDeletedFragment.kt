@@ -31,12 +31,6 @@ class RecentlyDeletedFragment : BaseFragment(R.layout.fragment_recently_deleted)
     private lateinit var noteAdapter: NoteAdapter
     private val viewModel: NotesViewModel by navGraphViewModels(R.id.nav_graph)
 
-    override fun onCreate(savedInstanceState: Bundle?)  {
-        super.onCreate(savedInstanceState)
-        enterTransition = slideAnimation(true)
-        returnTransition = slideAnimation(false)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

@@ -1,6 +1,7 @@
 package org.kaorun.nouto.ui.fragments.base
 
 import android.annotation.SuppressLint
+import android.os.Bundle
 import android.view.Gravity
 import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
@@ -32,6 +33,30 @@ abstract class BaseFragment(contentLayoutId: Int) : Fragment(contentLayoutId) {
             R.interpolator.m3_sys_motion_easing_emphasized_accelerate
         )
     }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enterTransition = slideAnimation(true)
+        returnTransition = slideAnimation(false)
+        exitTransition = fadeAnimation(false)
+        reenterTransition = fadeAnimation(true)
+//        enterTransition = MaterialSharedAxis(MaterialSharedAxis.X, true).apply {
+//            duration = durationAppearing
+//            interpolator = interpolatorAppearing
+//        }
+//        returnTransition = MaterialSharedAxis(MaterialSharedAxis.X, false).apply {
+//            duration = durationDisappearing
+//            interpolator = interpolatorDisappearing
+//        }
+//        exitTransition = MaterialSharedAxis(MaterialSharedAxis.X, true).apply {
+//            duration = durationDisappearing
+//            interpolator = interpolatorDisappearing
+//        }
+//        reenterTransition = MaterialSharedAxis(MaterialSharedAxis.X, false).apply {
+//            duration = durationAppearing
+//            interpolator = interpolatorAppearing
+//        }
+   }
     protected fun fadeAnimation(isAppearing: Boolean) = Fade().apply {
         if (isAppearing) {
             duration = durationAppearing

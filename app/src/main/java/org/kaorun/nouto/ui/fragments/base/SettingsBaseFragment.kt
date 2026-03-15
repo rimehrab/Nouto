@@ -18,14 +18,6 @@ abstract class SettingsBaseFragment : BaseFragment(R.layout.fragment_settings) {
     abstract val titleRes: Int
     abstract fun preferenceFragment(): PreferenceFragmentCompat
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        exitTransition = fadeAnimation(false)
-        reenterTransition = fadeAnimation(true)
-        enterTransition = slideAnimation(true)
-        returnTransition = slideAnimation(false)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

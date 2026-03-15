@@ -36,12 +36,6 @@ class NoteFragment : BaseFragment(R.layout.fragment_note) {
     private var isDeleting = false
     private var isSaved = false
 
-    override fun onCreate(savedInstanceState: Bundle?)  {
-        super.onCreate(savedInstanceState)
-        enterTransition = slideAnimation(true)
-        returnTransition = slideAnimation(false)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
