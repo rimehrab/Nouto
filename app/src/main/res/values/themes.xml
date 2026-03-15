@@ -8,6 +8,10 @@
         <item name="materialAlertDialogTheme">@style/ThemeOverlay.MaterialAlertDialog</item>
     </style>
 
+    <style name="Theme.Nouto.Splash" parent="Theme.Material3Expressive.DynamicColors.Light.NoActionBar">
+        <item name="android:windowSplashScreenBackground">?colorPrimary</item>
+    </style>
+
     <!-- Default theme -->
     <style name="Theme.Nouto.Default" parent="Theme.Nouto">
         <item name="colorPrimary">@color/md_theme_primary</item>

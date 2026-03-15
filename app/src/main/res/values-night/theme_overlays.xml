@@ -11,6 +11,7 @@
 
     <style name="ThemeOverlay.MaterialAlertDialog" parent="ThemeOverlay.Material3Expressive.MaterialAlertDialog.Centered">
         <item name="buttonBarPositiveButtonStyle">@style/Widget.Material3Expressive.Button</item>
+        <item name="buttonBarNeutralButtonStyle">@style/Widget.Material3Expressive.Button.OutlinedButton</item>
         <item name="buttonBarNegativeButtonStyle">@style/ButtonDialogNegative</item>
     </style>
 

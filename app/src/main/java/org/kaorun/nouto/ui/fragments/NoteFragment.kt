@@ -21,6 +21,8 @@ import com.onegravity.rteditor.api.format.RTFormat
 import org.kaorun.nouto.R
 import org.kaorun.nouto.data.Note
 import org.kaorun.nouto.databinding.FragmentNoteBinding
+import org.kaorun.nouto.ui.components.DeleteDialog
+import org.kaorun.nouto.ui.components.RestoreSnackbar
 import org.kaorun.nouto.ui.components.TextStyleFloatingToolbar
 import org.kaorun.nouto.ui.fragments.base.BaseFragment
 import org.kaorun.nouto.ui.utils.InsetsHandler
@@ -35,6 +37,7 @@ class NoteFragment : BaseFragment(R.layout.fragment_note) {
     private var note: Note? = null
     private var isDeleting = false
     private var isSaved = false
+    private var isRestoring = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -51,7 +54,6 @@ class NoteFragment : BaseFragment(R.layout.fragment_note) {
         setupInsets()
         setupToolbar()
         setupListeners()
-        showKeyboard()
     }
 
     private fun setupRtEditor(savedInstanceState: Bundle?) {
@@ -76,11 +78,13 @@ class NoteFragment : BaseFragment(R.layout.fragment_note) {
                     binding.noteTitle.setRichTextEditing(true, it.title)
                     binding.noteContent.setRichTextEditing(true, it.content)
                     binding.noteTitle.setSelection(binding.noteTitle.text?.length ?: 0)
+                    updateUIState(note, !isRestoring)
                 }
             }
         } else {
             binding.noteTitle.setRichTextEditing(true, null)
             binding.noteContent.setRichTextEditing(true, null)
+            updateUIState(null, true)
         }
     }
 
@@ -104,6 +108,21 @@ class NoteFragment : BaseFragment(R.layout.fragment_note) {
 
         binding.topAppBar.setNavigationOnClickListener {
             closeNoteFragment()
+        }
+
+        binding.buttonDeletePermanently.setOnClickListener {
+            DeleteDialog.show(requireContext(), resources) {
+                isDeleting = true
+                viewModel.deleteNote(note!!)
+                closeNoteFragment()
+            }
+        }
+
+        binding.buttonRestore.setOnClickListener {
+            isRestoring = true
+            binding.floatingToolbar.isVisible = true
+            viewModel.unmarkDeleted(note!!)
+            RestoreSnackbar.show(binding.root, binding.floatingToolbar, viewModel, note!!)
         }
 
         binding.topAppBar.setOnMenuItemClickListener { item ->
@@ -165,6 +184,20 @@ class NoteFragment : BaseFragment(R.layout.fragment_note) {
                 override fun onTransitionResume(transition: androidx.transition.Transition) {}
             }
         ) ?: InsetsHandler.applyImeInsets(binding.floatingToolbar)
+    }
+
+    private fun updateUIState(note: Note?, isShowKeyboard: Boolean) {
+        val isDeleted = note?.isDeleted ?: false
+
+        binding.floatingToolbar.isVisible = !isDeleted
+        binding.buttonGroup.isVisible = isDeleted
+
+        binding.topAppBar.menu.findItem(R.id.delete).isVisible = !isDeleted
+        binding.noteTitle.isEnabled = !isDeleted
+        binding.noteContent.isEnabled = !isDeleted
+        if (!isDeleted && isShowKeyboard) showKeyboard()
+        //binding.noteTitle.isFocusable = !isDeleted
+        //binding.noteContent.isFocusable = !isDeleted
     }
 
     private fun saveNote() {

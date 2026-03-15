@@ -14,11 +14,12 @@ import androidx.transition.TransitionManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.listitem.ListItemLayout
 import com.google.android.material.listitem.SwipeableListItem
-import com.google.android.material.snackbar.Snackbar
 import org.kaorun.nouto.R
 import org.kaorun.nouto.data.Note
 import org.kaorun.nouto.databinding.FragmentRecentlyDeletedBinding
 import org.kaorun.nouto.ui.adapter.NoteAdapter
+import org.kaorun.nouto.ui.components.DeleteDialog
+import org.kaorun.nouto.ui.components.RestoreSnackbar
 import org.kaorun.nouto.ui.fragments.base.BaseFragment
 import org.kaorun.nouto.ui.model.LayoutMode
 import org.kaorun.nouto.ui.utils.InsetsHandler
@@ -57,12 +58,11 @@ class RecentlyDeletedFragment : BaseFragment(R.layout.fragment_recently_deleted)
 
     private fun setupRecyclerView() {
         noteAdapter = NoteAdapter(
-            onItemClick = { },
-            onDeleteClick = { note ->
-                setupDeleteDialog(note)
-            },
+            onItemClick = {note -> openNoteFragment(note.id) },
+            onDeleteClick = { note -> setupDeleteDialog(note) },
             onRestoreClick = { note ->
-                setupRestoreSnackbar(note)
+                viewModel.unmarkDeleted(note)
+                RestoreSnackbar.show(binding.root, binding.fab, viewModel, note)
             }
         )
         binding.recyclerView.adapter = noteAdapter
@@ -104,17 +104,9 @@ class RecentlyDeletedFragment : BaseFragment(R.layout.fragment_recently_deleted)
         (holder.itemView as ListItemLayout)
             .setSwipeState(SwipeableListItem.STATE_CLOSED, Gravity.END)
 
-        MaterialAlertDialogBuilder(requireContext())
-            .setIcon(R.drawable.delete_forever_24px)
-            .setTitle(resources.getString(R.string.delete_note_dialog_title))
-            .setMessage(resources.getString(R.string.delete_note_dialog_message))
-            .setNegativeButton(resources.getString(R.string.delete)) { _, _ ->
-                viewModel.deleteNote(note)
-            }
-            .setPositiveButton(resources.getString(R.string.cancel)) { dialog, _ ->
-                dialog.cancel()
-            }
-            .show()
+        DeleteDialog.show(requireContext(), resources) {
+            viewModel.deleteNote(note)
+        }
     }
 
     private fun setupDeleteDialog(notes: List<Note>) {
@@ -131,14 +123,26 @@ class RecentlyDeletedFragment : BaseFragment(R.layout.fragment_recently_deleted)
             .show()
     }
 
-    private fun setupRestoreSnackbar(note: Note) {
-        viewModel.unmarkDeleted(note)
-        Snackbar.make(binding.root, R.string.note_restored_message, Snackbar.LENGTH_SHORT)
-            .setAnchorView(binding.fab)
-            .setAction(R.string.undo) {
-                viewModel.markDeleted(note)
-            }
-            .show()
+//    private fun setupRestoreDialog(note: Note) {
+//        MaterialAlertDialogBuilder(requireContext())
+//            .setIcon(R.drawable.restore_from_trash_24px)
+//            .setTitle(resources.getString(R.string.restore_note_dialog_title))
+//            .setMessage(resources.getString(R.string.restore_note_dialog_message))
+//            .setPositiveButton(resources.getString(R.string.restore)) { _, _ ->
+//                setupRestoreSnackbar(note)
+//            }
+//            .setNeutralButton(resources.getString(R.string.cancel)) { dialog, _ ->
+//                dialog.cancel()
+//            }
+//            .show()
+//    }
+
+    private fun openNoteFragment(noteId: Int) {
+        TransitionManager.endTransitions(binding.root.parent as ViewGroup)
+        findNavController().navigate(
+            RecentlyDeletedFragmentDirections.actionRecentlyDeletedFragmentToNoteFragment(noteId)
+        )
+        binding.fab.hide()
     }
 
     private fun closeRecentlyDeletedFragment() {

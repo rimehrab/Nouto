@@ -35,6 +35,33 @@
                 app:menu="@menu/appbar"
                 app:navigationIcon="@drawable/arrow_back_24px" />
 
+            <com.google.android.material.button.MaterialButtonGroup
+                android:id="@+id/button_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:spacing="4dp"
+                android:visibility="gone">
+
+                <com.google.android.material.button.MaterialButton
+                    style="@style/Widget.Material3Expressive.Button.IconButton.Filled"
+                    android:id="@+id/button_delete_permanently"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:backgroundTint="?colorSurfaceContainerHighest"
+                    app:iconTint="?colorOnSurfaceVariant"
+                    app:icon="@drawable/delete_forever_24px"
+                    app:materialSizeOverlay="@style/SizeOverlay.Material3Expressive.Button.IconButton.Small.Narrow" />
+
+                <com.google.android.material.button.MaterialButton
+                    style="@style/Widget.Material3Expressive.Button.IconButton.Filled"
+                    android:id="@+id/button_restore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:icon="@drawable/restore_from_trash_24px"
+                    app:materialSizeOverlay="@style/SizeOverlay.Material3Expressive.Button.IconButton.Small.Wide" />
+            </com.google.android.material.button.MaterialButtonGroup>
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/buttonSave"
                 style="@style/Widget.Material3Expressive.Button"
@@ -125,10 +152,12 @@
         android:layout_gravity="center|bottom"
         android:layout_margin="16dp"
         android:accessibilityTraversalBefore="@id/note_content"
+        android:visibility="gone"
         app:layout_behavior="com.google.android.material.behavior.HideViewOnScrollBehavior"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:visibility="visible">
 
         <LinearLayout
             android:layout_width="wrap_content"

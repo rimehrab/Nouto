@@ -36,4 +36,7 @@
     <string name="delete_notes_dialog_title">Delete all notes forever?</string>
     <string name="delete_notes_dialog_message">Notes will be permanently deleted and can\'t be recovered</string>
     <string name="type_to_start_search">Type to start search</string>
+    <string name="restore_note_dialog_title">Restore note from trash?</string>
+    <string name="restore_note_dialog_message">This item will be restored from trash</string>
+    <string name="restore">Restore</string>
 </resources>
