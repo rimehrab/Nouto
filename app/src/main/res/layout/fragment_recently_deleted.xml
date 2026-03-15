@@ -36,7 +36,7 @@
                 android:paddingStart="16dp"
                 android:paddingEnd="8dp"
                 android:theme="@style/ThemeOverlay.CircleNavigationButton"
-                app:title="Recently deleted"
+                app:title="@string/trash"
                 app:titleMarginStart="8dp"
                 app:layout_collapseMode="pin"
                 app:navigationIcon="@drawable/arrow_back_24px"
