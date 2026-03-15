@@ -1,5 +1,5 @@
 <resources>
-    <style name="Base.Theme.Nouto" parent="Theme.Material3Expressive.DynamicColors.Dark.NoActionBar">
+    <style name="Base.Theme.Nouto" parent="Theme.Material3Expressive.Dark.NoActionBar">
     </style>
 
     <style name="Theme.Nouto" parent="Base.Theme.Nouto">

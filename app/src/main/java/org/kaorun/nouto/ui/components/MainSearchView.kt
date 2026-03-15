@@ -1,7 +1,9 @@
 package org.kaorun.nouto.ui.components
 
 import android.content.res.Resources
+import android.view.View
 import androidx.activity.OnBackPressedCallback
+import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,11 +23,12 @@ class MainSearchView(
     private val searchBar: SearchBar,
     private val fab: FloatingActionButton,
     private val searchRecyclerView: RecyclerView,
+    private val searchSuggestionsEmptyLayout: View,
     private val viewModel: NotesViewModel,
     private val searchViewModel: SearchViewModel,
     private val resources: Resources,
+    private val lifecycleOwner: LifecycleOwner,
     private val activity: FragmentActivity,
-    private val lifecycleOwner: LifecycleOwner
 ) {
     private lateinit var searchAdapter: SearchAdapter
     private val backCallback = object : OnBackPressedCallback(false) {
@@ -43,6 +46,7 @@ class MainSearchView(
 
     private fun observeViewModel(lifecycleOwner: LifecycleOwner) {
         searchViewModel.searchHistory.observe(lifecycleOwner) { history ->
+            searchSuggestionsEmptyLayout.isVisible = history.isNullOrEmpty()
             searchAdapter.submitList(history)
         }
     }

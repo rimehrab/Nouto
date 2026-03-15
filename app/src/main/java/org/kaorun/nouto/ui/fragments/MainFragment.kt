@@ -204,11 +204,12 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
             binding.searchBar,
             binding.fab,
             binding.searchRecyclerView,
+            binding.searchSuggestionsEmptyLayout.root,
             viewModel,
             searchViewModel,
             resources,
-            requireActivity(),
-            viewLifecycleOwner
+            viewLifecycleOwner,
+            requireActivity()
         )
     }
 

@@ -35,4 +35,5 @@
     <string name="note_restored_message">Note has been restored</string>
     <string name="delete_notes_dialog_title">Delete all notes forever?</string>
     <string name="delete_notes_dialog_message">Notes will be permanently deleted and can\'t be recovered</string>
+    <string name="type_to_start_search">Type to start search</string>
 </resources>
