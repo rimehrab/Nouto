@@ -50,7 +50,9 @@ class RecentlyDeletedFragment : BaseFragment(R.layout.fragment_recently_deleted)
 
     private fun observeNotes() {
         viewModel.deletedNotes.observe(viewLifecycleOwner) { notes ->
-            noteAdapter.submitList(notes)
+            noteAdapter.submitList(notes) {
+                binding.recyclerView.invalidateItemDecorations()
+            }
             binding.notesEmptyLayout.root.isVisible = notes.isEmpty()
             binding.fab.isVisible = notes.isNotEmpty()
         }

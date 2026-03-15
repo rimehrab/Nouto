@@ -19,7 +19,7 @@ class MarginItemDecoration(
         val position = parent.getChildAdapterPosition(view)
         val layoutParams = view.layoutParams as? StaggeredGridLayoutManager.LayoutParams
         val column = layoutParams?.spanIndex ?: (position % spanCount)
-        val itemCount = state.itemCount
+        val itemCount = parent.adapter?.itemCount ?: 0
 
         outRect.top = if (position < spanCount) {
             if (isTopMargin) outerSpaceSize else 0
