@@ -25,7 +25,7 @@ abstract class PreferenceBaseFragment : PreferenceFragmentCompat() {
         listView.adapter = SegmentedPreferenceAdapter(adapter)
     }
 
-    private class SegmentedPreferenceAdapter(
+    inner class SegmentedPreferenceAdapter(
         private val adapter: RecyclerView.Adapter<RecyclerView.ViewHolder>
     ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -47,7 +47,20 @@ abstract class PreferenceBaseFragment : PreferenceFragmentCompat() {
             adapter.createViewHolder(parent, viewType)
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
             adapter.bindViewHolder(holder, position)
-            (holder.itemView as? ListItemLayout)?.updateAppearance(position, itemCount)
+            val view = holder.itemView as? ListItemLayout ?: return
+            view.updateAppearance(preferencePosition(position), preferenceItemCount())
+        }
+
+        private fun isPreference(position: Int) = adapter.createViewHolder(
+            listView,
+            adapter.getItemViewType(position)
+        ).itemView is ListItemLayout
+
+        private fun preferenceItemCount() = (0 until adapter.itemCount).count {
+            isPreference(it)
+        }
+        private fun preferencePosition(position: Int) = (0 until position).count {
+            isPreference(it)
         }
     }
 }

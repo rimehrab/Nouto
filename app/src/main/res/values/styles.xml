@@ -41,6 +41,11 @@
         <item name="preferenceStyle">@style/SegmentedListPreferenceItem</item>
         <item name="dialogPreferenceStyle">@style/SegmentedListPreferenceItem</item>
         <item name="switchPreferenceCompatStyle">@style/SegmentedListSwitchPreferenceItem</item>
+        <item name="preferenceCategoryStyle">@style/MaterialPreferenceCategory</item>
+    </style>
+
+    <style name="MaterialPreferenceCategory" parent="@style/Preference.Category">
+        <item name="android:layout">@layout/item_preference_category</item>
     </style>
 
     <style name="SegmentedListPreferenceItem" parent="Preference">

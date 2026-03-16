@@ -71,6 +71,8 @@ abstract class BaseFragment(contentLayoutId: Int) : Fragment(contentLayoutId) {
             interpolator = interpolatorEmphasized
         }
    }
+
+    @Suppress("unused")
     protected fun fadeAnimation(isAppearing: Boolean) = Fade().apply {
         if (isAppearing) {
             duration = durationAppearing
@@ -81,6 +83,7 @@ abstract class BaseFragment(contentLayoutId: Int) : Fragment(contentLayoutId) {
         }
     }
 
+    @Suppress("unused")
     protected fun slideAnimation(isAppearing: Boolean) = Slide(Gravity.END).apply {
         if (isAppearing) {
             duration = durationAppearing
