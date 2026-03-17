@@ -2,6 +2,7 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinator"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?colorSurfaceContainer">
@@ -10,11 +11,10 @@
         android:id="@+id/app_bar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?colorSurfaceContainer"
-        app:expanded="false">
+        android:background="?colorSurfaceContainer">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
-            style="?collapsingToolbarLayoutLargeStyle"
+            style="?attr/collapsingToolbarLayoutLargeStyle"
             android:id="@+id/collapsing_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -25,7 +25,7 @@
             app:collapsedTitleTextAppearance="?textAppearanceTitleLargeEmphasized"
             app:expandedTitleTextAppearance="?textAppearanceDisplaySmallEmphasized"
             app:titleCollapseMode="scale"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
 
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/toolbar"
@@ -34,6 +34,7 @@
                 android:paddingStart="16dp"
                 android:paddingEnd="8dp"
                 android:theme="@style/ThemeOverlay.CircleNavigationButton"
+                android:elevation="0dp"
                 app:titleMarginStart="8dp"
                 app:layout_collapseMode="pin"
                 app:navigationIcon="@drawable/arrow_back_24px"
@@ -46,5 +47,6 @@
         android:id="@+id/preference_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:clipToPadding="false"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

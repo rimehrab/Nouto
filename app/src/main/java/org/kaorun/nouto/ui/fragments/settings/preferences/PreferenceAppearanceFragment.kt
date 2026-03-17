@@ -1,6 +1,8 @@
 package org.kaorun.nouto.ui.fragments.settings.preferences
 
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
 import androidx.preference.ListPreference
 import androidx.preference.SwitchPreferenceCompat
 import org.kaorun.nouto.R
@@ -23,5 +25,11 @@ class PreferenceAppearanceFragment : PreferenceBaseFragment() {
                 requireActivity().recreate()
                 true
             }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        imageView = LayoutInflater.from(requireContext())
+            .inflate(R.layout.illustration_themes, listView, false)
+        super.onViewCreated(view, savedInstanceState)
     }
 }

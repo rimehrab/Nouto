@@ -35,13 +35,9 @@ abstract class SettingsBaseFragment : BaseFragment(R.layout.fragment_settings) {
             isTopPaddingEnabled = true,
             isBottomPaddingEnabled = false
         )
-        InsetsHandler.applyViewInsets(
-            binding.preferenceContainer,
-            isTopPaddingEnabled = false,
-            isBottomPaddingEnabled = false
-        )
 
         binding.toolbar.title = getString(titleRes)
+        binding.appBarLayout.setExpanded(false)
         binding.toolbar.setNavigationOnClickListener {
             TransitionManager.endTransitions(binding.root.parent as ViewGroup)
             findNavController().popBackStack()

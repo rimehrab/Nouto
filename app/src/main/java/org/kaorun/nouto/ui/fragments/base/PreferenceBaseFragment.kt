@@ -5,13 +5,17 @@ import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import androidx.preference.PreferenceFragmentCompat
+import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.listitem.ListItemLayout
 import org.kaorun.nouto.R
 import org.kaorun.nouto.ui.model.LayoutMode
+import org.kaorun.nouto.ui.utils.InsetsHandler
 import org.kaorun.nouto.ui.utils.MarginItemDecoration
 
 abstract class PreferenceBaseFragment : PreferenceFragmentCompat() {
+    var imageView: View? = null
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val adapter = listView.adapter ?: return
@@ -22,7 +26,14 @@ abstract class PreferenceBaseFragment : PreferenceFragmentCompat() {
             LayoutMode.LINEAR.spanCount,
             false
         ))
-        listView.adapter = SegmentedPreferenceAdapter(adapter)
+        val segmentedPreferenceAdapter = SegmentedPreferenceAdapter(adapter)
+
+        listView.adapter = imageView?.let { imageView ->
+            val adapter = ImageViewAdapter(imageView)
+            ConcatAdapter(adapter, segmentedPreferenceAdapter)
+        } ?: segmentedPreferenceAdapter
+
+        InsetsHandler.applyViewInsets(listView, false)
     }
 
     inner class SegmentedPreferenceAdapter(
@@ -33,11 +44,16 @@ abstract class PreferenceBaseFragment : PreferenceFragmentCompat() {
             adapter.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
                 @SuppressLint("NotifyDataSetChanged")
                 override fun onChanged() = notifyDataSetChanged()
-                override fun onItemRangeChanged(positionStart: Int, itemCount: Int) = notifyItemRangeChanged(positionStart, itemCount)
-                override fun onItemRangeChanged(positionStart: Int, itemCount: Int, payload: Any?) = notifyItemRangeChanged(positionStart, itemCount, payload)
-                override fun onItemRangeInserted(positionStart: Int, itemCount: Int) = notifyItemRangeInserted(positionStart, itemCount)
-                override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) = notifyItemRangeRemoved(positionStart, itemCount)
-                override fun onItemRangeMoved(fromPosition: Int, toPosition: Int, itemCount: Int) = notifyItemMoved(fromPosition, toPosition)
+                override fun onItemRangeChanged(positionStart: Int, itemCount: Int) =
+                    notifyItemRangeChanged(positionStart, itemCount)
+                override fun onItemRangeChanged(positionStart: Int, itemCount: Int, payload: Any?) =
+                    notifyItemRangeChanged(positionStart, itemCount, payload)
+                override fun onItemRangeInserted(positionStart: Int, itemCount: Int) =
+                    notifyItemRangeInserted(positionStart, itemCount)
+                override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) =
+                    notifyItemRangeRemoved(positionStart, itemCount)
+                override fun onItemRangeMoved(fromPosition: Int, toPosition: Int, itemCount: Int) =
+                    notifyItemMoved(fromPosition, toPosition)
             })
         }
 
@@ -56,11 +72,21 @@ abstract class PreferenceBaseFragment : PreferenceFragmentCompat() {
             adapter.getItemViewType(position)
         ).itemView is ListItemLayout
 
-        private fun preferenceItemCount() = (0 until adapter.itemCount).count {
-            isPreference(it)
-        }
         private fun preferencePosition(position: Int) = (0 until position).count {
             isPreference(it)
         }
+
+        private fun preferenceItemCount() = (0 until adapter.itemCount).count {
+            isPreference(it)
+        }
+    }
+
+    class ImageViewAdapter(
+        private val view: View
+    ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+        override fun getItemCount() = 1
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
+            object : RecyclerView.ViewHolder(view) {}
+        override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) = Unit
     }
 }
