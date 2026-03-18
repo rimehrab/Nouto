@@ -11,12 +11,20 @@ import org.kaorun.nouto.ui.fragments.base.PreferenceBaseFragment
 class PreferenceMainFragment : PreferenceBaseFragment() {
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.preferences_main, rootKey)
+        val parentView by lazy {
+            requireParentFragment().requireView().parent as ViewGroup
+        }
 
         findPreference<Preference>("screen_appearance")?.setOnPreferenceClickListener {
-            val parentView = requireParentFragment().requireView().parent as ViewGroup
             TransitionManager.endTransitions(parentView)
             requireParentFragment().findNavController()
                 .navigate(R.id.action_settingsMainFragment_to_settingsAppearanceFragment)
+            true
+        }
+        findPreference<Preference>("screen_about")?.setOnPreferenceClickListener {
+            TransitionManager.endTransitions(parentView)
+            requireParentFragment().findNavController()
+                .navigate(R.id.action_settingsMainFragment_to_settingsAboutFragment)
             true
         }
     }

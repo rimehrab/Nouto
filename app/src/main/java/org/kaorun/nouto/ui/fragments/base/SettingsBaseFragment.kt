@@ -16,6 +16,7 @@ abstract class SettingsBaseFragment : BaseFragment(R.layout.fragment_settings) {
     protected val binding get() = _binding!!
 
     abstract val titleRes: Int
+    private var isExpanded = false
     abstract fun preferenceFragment(): PreferenceFragmentCompat
 
     override fun onCreateView(
@@ -27,8 +28,17 @@ abstract class SettingsBaseFragment : BaseFragment(R.layout.fragment_settings) {
         return binding.root
     }
 
+    companion object {
+        private const val KEY_IS_EXPANDED = "appbar_is_expanded"
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        if (savedInstanceState != null) {
+            isExpanded = savedInstanceState.getBoolean(KEY_IS_EXPANDED, true)
+        }
+
 
         InsetsHandler.applyViewInsets(
             binding.appBarLayout,
@@ -37,7 +47,10 @@ abstract class SettingsBaseFragment : BaseFragment(R.layout.fragment_settings) {
         )
 
         binding.toolbar.title = getString(titleRes)
-        binding.appBarLayout.setExpanded(false)
+        binding.appBarLayout.addOnOffsetChangedListener { _, verticalOffset ->
+            isExpanded = verticalOffset == 0
+        }
+        binding.appBarLayout.setExpanded(isExpanded)
         binding.toolbar.setNavigationOnClickListener {
             TransitionManager.endTransitions(binding.root.parent as ViewGroup)
             findNavController().popBackStack()
@@ -49,6 +62,12 @@ abstract class SettingsBaseFragment : BaseFragment(R.layout.fragment_settings) {
                 .commit()
         }
     }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putBoolean(KEY_IS_EXPANDED, isExpanded)
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

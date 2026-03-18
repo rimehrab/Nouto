@@ -34,22 +34,33 @@
     <fragment
         android:id="@+id/settingsMainFragment"
         android:name="org.kaorun.nouto.ui.fragments.settings.SettingsMainFragment"
-        android:label="SettingsFragment" >
+        android:label="SettingsFragment"
+        tools:layout="@layout/fragment_settings">
         <action
             android:id="@+id/action_settingsMainFragment_to_settingsAppearanceFragment"
             app:destination="@id/settingsAppearanceFragment" />
+        <action
+            android:id="@+id/action_settingsMainFragment_to_settingsAboutFragment"
+            app:destination="@id/settingsAboutFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingsAppearanceFragment"
         android:name="org.kaorun.nouto.ui.fragments.settings.SettingsAppearanceFragment"
-        android:label="SettingsAppearanceFragment" />
+        android:label="SettingsAppearanceFragment"
+        tools:layout="@layout/fragment_settings" />
     <fragment
         android:id="@+id/recentlyDeletedFragment"
         android:name="org.kaorun.nouto.ui.fragments.RecentlyDeletedFragment"
-        android:label="RecentlyDeletedFragment" >
+        android:label="RecentlyDeletedFragment"
+        tools:layout="@layout/fragment_recently_deleted">
         <action
             android:id="@+id/action_recentlyDeletedFragment_to_noteFragment"
             app:destination="@id/noteFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/settingsAboutFragment"
+        android:name="org.kaorun.nouto.ui.fragments.settings.SettingsAboutFragment"
+        android:label="SettingsAboutFragment"
+        tools:layout="@layout/fragment_settings" />
 
 </navigation>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <org.kaorun.nouto.ui.components.MaterialListPreference
+        android:key="theme"
+        android:icon="@drawable/brightness_6_24px"
+        android:title="@string/theme"
+        android:entries="@array/theme_entries"
+        android:entryValues="@array/theme_values"
+        android:defaultValue="system"
+        app:useSimpleSummaryProvider="true" />
+
+    <org.kaorun.nouto.ui.components.MaterialSwitchPreferenceCompat
+        android:key="dynamic_colors"
+        android:icon="@drawable/colors_24px"
+        android:title="Dynamic colors"
+        android:summary="Colors based on your wallpaper"
+        android:defaultValue="true" />
+</androidx.preference.PreferenceScreen>
