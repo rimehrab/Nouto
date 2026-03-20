@@ -15,6 +15,7 @@
         android:minHeight="21dp"
         android:textAppearance="?textAppearanceLabelLarge"
         android:textColor="?colorPrimary"
+        android:textFontWeight="500"
         android:maxLines="1"
         tools:text="Label" />
 </FrameLayout>
