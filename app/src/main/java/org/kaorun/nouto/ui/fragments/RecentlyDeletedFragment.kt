@@ -11,7 +11,6 @@ import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.transition.TransitionManager
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.listitem.ListItemLayout
 import com.google.android.material.listitem.SwipeableListItem
 import org.kaorun.nouto.R
@@ -63,8 +62,11 @@ class RecentlyDeletedFragment : BaseFragment(R.layout.fragment_recently_deleted)
             onItemClick = {note -> openNoteFragment(note.id) },
             onDeleteClick = { note -> setupDeleteDialog(note) },
             onRestoreClick = { note ->
+                val anchorView = if (noteAdapter.currentList.size == 1) null else binding.fab
+                RestoreSnackbar.show(binding.root, anchorView) {
+                    viewModel.markDeleted(note)
+                }
                 viewModel.unmarkDeleted(note)
-                RestoreSnackbar.show(binding.root, binding.fab, viewModel, note)
             }
         )
         binding.recyclerView.adapter = noteAdapter
@@ -112,17 +114,10 @@ class RecentlyDeletedFragment : BaseFragment(R.layout.fragment_recently_deleted)
     }
 
     private fun setupDeleteDialog(notes: List<Note>) {
-        MaterialAlertDialogBuilder(requireContext())
-            .setIcon(R.drawable.delete_forever_24px)
-            .setTitle(resources.getString(R.string.delete_notes_dialog_title))
-            .setMessage(resources.getString(R.string.delete_notes_dialog_message))
-            .setNegativeButton(resources.getString(R.string.delete)) { _, _ ->
-                viewModel.deleteNotes(notes)
-            }
-            .setPositiveButton(resources.getString(R.string.cancel)) { dialog, _ ->
-                dialog.cancel()
-            }
-            .show()
+        DeleteDialog.show(requireContext(), resources, true) {
+            binding.recyclerView.isVisible = false
+            viewModel.deleteNotes(notes)
+        }
     }
 
 //    private fun setupRestoreDialog(note: Note) {

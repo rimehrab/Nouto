@@ -21,11 +21,11 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.transition.TransitionManager
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.sidesheet.SideSheetDialog
-import com.google.android.material.snackbar.Snackbar
 import org.kaorun.nouto.R
 import org.kaorun.nouto.data.Note
 import org.kaorun.nouto.databinding.FragmentMainBinding
 import org.kaorun.nouto.ui.adapter.NoteAdapter
+import org.kaorun.nouto.ui.components.DeleteSnackbar
 import org.kaorun.nouto.ui.components.MainSearchView
 import org.kaorun.nouto.ui.fragments.base.BaseFragment
 import org.kaorun.nouto.ui.model.LayoutMode
@@ -69,6 +69,12 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
             binding.recyclerView.isInvisible = notes.isEmpty() && isSearching
             binding.notesEmptyLayout.root.isVisible = notes.isEmpty() && !isSearching
             binding.nothingFoundLayout.root.isVisible = notes.isEmpty() && isSearching
+        }
+
+        viewModel.pendingDelete.observe(viewLifecycleOwner) { note ->
+            note ?: return@observe
+            setupSnackbar(note)
+            viewModel.clearPendingDelete()
         }
     }
 
@@ -209,12 +215,9 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
 
     private fun setupSnackbar(note: Note) {
        viewModel.markDeleted(note)
-        Snackbar.make(binding.root, R.string.note_deleted_message, Snackbar.LENGTH_SHORT)
-            .setAnchorView(binding.fab)
-            .setAction(R.string.undo) {
-              viewModel.unmarkDeleted(note)
-            }
-            .show()
+        DeleteSnackbar.show(binding.root, binding.fab) {
+            viewModel.unmarkDeleted(note)
+        }
     }
 
     private fun openNoteFragment(noteId: Int?) {

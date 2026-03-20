@@ -122,19 +122,32 @@ class NoteFragment : BaseFragment(R.layout.fragment_note) {
             isRestoring = true
             binding.floatingToolbar.isVisible = true
             viewModel.unmarkDeleted(note!!)
-            RestoreSnackbar.show(binding.root, binding.floatingToolbar, viewModel, note!!)
+            setupRestoreSnackbar(note)
         }
 
         binding.topAppBar.setOnMenuItemClickListener { item ->
             when (item.itemId) {
                 R.id.delete -> {
-                    isDeleting = true
-                    note?.let { viewModel.deleteNote(it) }
-                    closeNoteFragment()
+                    note?.let {
+                        isDeleting = true
+                        viewModel.setPendingDelete(it)
+                        closeNoteFragment()
+                    } ?: run {
+                        DeleteDialog.show(requireContext(), resources) {
+                            isDeleting = true
+                            closeNoteFragment()
+                        }
+                    }
                     true
                 }
                 else -> false
             }
+        }
+    }
+
+    private fun setupRestoreSnackbar(note: Note?) {
+        RestoreSnackbar.show(binding.root, binding.floatingToolbar) {
+            viewModel.markDeleted(note!!)
         }
     }
 
@@ -187,7 +200,10 @@ class NoteFragment : BaseFragment(R.layout.fragment_note) {
     }
 
     private fun updateUIState(note: Note?, isShowKeyboard: Boolean) {
-        val isDeleted = note?.isDeleted ?: false
+        val isDeleted = if (!isDeleting) {
+            note?.isDeleted ?: false
+        }
+        else false
 
         binding.floatingToolbar.isVisible = !isDeleted
         binding.buttonGroup.isVisible = isDeleted

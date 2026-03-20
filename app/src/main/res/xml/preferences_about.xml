@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <org.kaorun.nouto.ui.components.MaterialListPreference
         android:key="theme"
@@ -11,10 +12,9 @@
         android:defaultValue="system"
         app:useSimpleSummaryProvider="true" />
 
-    <org.kaorun.nouto.ui.components.MaterialSwitchPreferenceCompat
-        android:key="dynamic_colors"
-        android:icon="@drawable/colors_24px"
-        android:title="Dynamic colors"
-        android:summary="Colors based on your wallpaper"
-        android:defaultValue="true" />
+    <Preference
+        android:key="version"
+        android:icon="@drawable/info_24px"
+        android:title="@string/version"
+        tools:summary="1.0.0" />
 </androidx.preference.PreferenceScreen>

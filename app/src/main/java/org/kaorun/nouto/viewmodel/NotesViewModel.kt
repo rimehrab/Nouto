@@ -16,10 +16,13 @@ class NotesViewModel(application: Application) : AndroidViewModel(application) {
     private val _searchQuery = MutableLiveData<String?>(null)
     private val _isGridMode = MutableLiveData(false)
     private val allNotes: LiveData<List<Note>>
+    private val _pendingDelete = MutableLiveData<Note?>()
     val deletedNotes: LiveData<List<Note>>
     val displayedNotes: LiveData<List<Note>>
     val searchQuery: LiveData<String?> = _searchQuery
     val isGridMode: LiveData<Boolean> = _isGridMode
+    val pendingDelete: LiveData<Note?> = _pendingDelete
+
 
     init {
         val noteDao = NoteDatabase.getDatabase(application).noteDao()
@@ -87,5 +90,14 @@ class NotesViewModel(application: Application) : AndroidViewModel(application) {
         viewModelScope.launch {
             repository.update(note.copy(isDeleted = false))
         }
+    }
+
+    fun setPendingDelete(note: Note) {
+        markDeleted(note)
+        _pendingDelete.value = note
+    }
+
+    fun clearPendingDelete() {
+        _pendingDelete.value = null
     }
 }

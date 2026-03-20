@@ -40,4 +40,7 @@
     <string name="restore_note_dialog_message">This item will be restored from trash</string>
     <string name="restore">Restore</string>
     <string name="theming">Theming</string>
+    <string name="app_icon">App icon</string>
+    <string name="the_best_app_for_taking_notes">The best app for taking notes</string>
+    <string name="version">Version</string>
 </resources>
