@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <org.kaorun.nouto.ui.components.MaterialListPreference
-        android:key="theme"
-        android:icon="@drawable/brightness_6_24px"
-        android:title="@string/theme"
-        android:entries="@array/theme_entries"
-        android:entryValues="@array/theme_values"
-        android:defaultValue="system"
-        app:useSimpleSummaryProvider="true" />
+    <Preference
+        android:key="source_code"
+        android:icon="@drawable/code_24px"
+        android:title="@string/source_code"
+        android:summary="@string/source_code_summary" />
+
+    <Preference
+        android:key="contact_developer"
+        android:icon="@drawable/support_agent_24px"
+        android:title="@string/contact_developer"
+        android:summary="@string/contact_developer_summary" />
 
     <Preference
         android:key="version"

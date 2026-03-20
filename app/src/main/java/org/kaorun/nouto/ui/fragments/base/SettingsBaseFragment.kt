@@ -1,9 +1,11 @@
 package org.kaorun.nouto.ui.fragments.base
 
+import android.graphics.Typeface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.res.ResourcesCompat
 import androidx.navigation.fragment.findNavController
 import androidx.preference.PreferenceFragmentCompat
 import androidx.transition.TransitionManager
@@ -51,6 +53,12 @@ abstract class SettingsBaseFragment : BaseFragment(R.layout.fragment_settings) {
             isExpanded = verticalOffset == 0
         }
         binding.appBarLayout.setExpanded(isExpanded)
+        binding. collapsingToolbar.apply {
+            val font = ResourcesCompat.getFont(context, R.font.google_sans_flex_round)
+            val typeface = Typeface.create(font, 500, false)
+            setCollapsedTitleTypeface(typeface)
+            setExpandedTitleTypeface(typeface)
+        }
         binding.toolbar.setNavigationOnClickListener {
             TransitionManager.endTransitions(binding.root.parent as ViewGroup)
             findNavController().popBackStack()

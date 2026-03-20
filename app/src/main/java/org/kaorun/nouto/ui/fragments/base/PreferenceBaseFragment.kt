@@ -1,9 +1,11 @@
 package org.kaorun.nouto.ui.fragments.base
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.net.toUri
 import androidx.preference.PreferenceFragmentCompat
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -34,6 +36,11 @@ abstract class PreferenceBaseFragment : PreferenceFragmentCompat() {
         } ?: segmentedPreferenceAdapter
 
         InsetsHandler.applyViewInsets(listView, false)
+    }
+
+    protected fun openUrl(url: Int) {
+        val intent = Intent(Intent.ACTION_VIEW, resources.getString(url).toUri())
+        startActivity(intent)
     }
 
     inner class SegmentedPreferenceAdapter(

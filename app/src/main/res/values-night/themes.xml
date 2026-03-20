@@ -3,6 +3,7 @@
     </style>
 
     <style name="Theme.Nouto" parent="Base.Theme.Nouto">
+        <item name="android:fontFamily">@font/google_sans_flex_variable</item>
         <item name="android:windowBackground">?colorSurfaceContainer</item>
         <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
         <item name="materialAlertDialogTheme">@style/ThemeOverlay.MaterialAlertDialog</item>

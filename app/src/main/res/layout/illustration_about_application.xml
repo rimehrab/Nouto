@@ -31,6 +31,8 @@
         android:gravity="center_horizontal"
         android:textAppearance="?textAppearanceDisplaySmallEmphasized"
         android:textColor="?colorOnSurface"
+        android:fontFamily="@font/google_sans_flex_round"
+        android:textFontWeight="500"
         android:text="@string/app_name" />
 
     <TextView
@@ -40,5 +42,7 @@
         android:gravity="center_horizontal"
         android:textAppearance="?textAppearanceHeadlineSmallEmphasized"
         android:textColor="?colorOnSurface"
+        android:fontFamily="@font/google_sans_flex_round"
+        android:textFontWeight="500"
         android:text="@string/the_best_app_for_taking_notes" />
 </LinearLayout>

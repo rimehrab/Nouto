@@ -48,6 +48,11 @@
                     android:maxLines="1"
                     android:textAppearance="?textAppearanceListItem"
                     android:textColor="?colorOnSurface"
+                    android:textFontWeight="500"
+                    android:includeFontPadding="false"
+                    android:lineHeight="21sp"
+                    android:firstBaselineToTopHeight="16.5sp"
+                    android:lastBaselineToBottomHeight="4.5sp"
                     tools:text="@string/about" />
 
                 <TextView
@@ -57,13 +62,17 @@
                     android:maxLines="3"
                     android:textAppearance="?textAppearanceListItemSecondary"
                     android:textColor="?colorOnSurfaceVariant"
+                    android:includeFontPadding="false"
+                    android:lineHeight="19sp"
+                    android:firstBaselineToTopHeight="15sp"
+                    android:lastBaselineToBottomHeight="4sp"
                     tools:text="@string/about_summary" />
             </LinearLayout>
 
             <FrameLayout
                 android:id="@android:id/widget_frame"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_marginStart="12dp" />
         </LinearLayout>
     </com.google.android.material.listitem.ListItemCardView>

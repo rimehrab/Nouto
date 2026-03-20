@@ -1,5 +1,7 @@
 <resources>
-    <string name="app_name">Nouto</string>
+    <string name="app_name" translatable="false">Nouto</string>
+    <string name="repository_link" translatable="false">https://github.com/HotarunIchijou/Nouto</string>
+    <string name="telegram_link" translatable="false">https://t.me/KaorunIchijou"</string>
     <string name="save">Save</string>
     <string name="title">Title</string>
     <string name="notes_hint">Type your notes here</string>
@@ -43,4 +45,8 @@
     <string name="app_icon">App icon</string>
     <string name="the_best_app_for_taking_notes">The best app for taking notes</string>
     <string name="version">Version</string>
+    <string name="source_code">Source code</string>
+    <string name="source_code_summary">Project repository on GitHub</string>
+    <string name="contact_developer">Contact developer</string>
+    <string name="contact_developer_summary">Give feedback to developer via Telegram</string>
 </resources>

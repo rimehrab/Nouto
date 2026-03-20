@@ -19,6 +19,16 @@ class PreferenceAboutFragment : PreferenceBaseFragment() {
     ) {
         setPreferencesFromResource(R.xml.preferences_about, rootKey)
 
+        findPreference<Preference>("source_code")?.setOnPreferenceClickListener {
+            openUrl(R.string.repository_link)
+            true
+        }
+
+        findPreference<Preference>("contact_developer")?.setOnPreferenceClickListener {
+            openUrl(R.string.telegram_link)
+            true
+        }
+
         findPreference<Preference>("version")?.summary = "$VERSION_NAME ($VERSION_CODE)"
     }
 
