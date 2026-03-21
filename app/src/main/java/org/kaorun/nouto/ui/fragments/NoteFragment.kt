@@ -152,19 +152,38 @@ class NoteFragment : BaseFragment(R.layout.fragment_note) {
     }
 
     private fun setupChangeListener() {
+        val isChanged = {
+            (binding.noteTitle.getText(RTFormat.HTML).orEmpty() != (note?.title ?: "") &&
+            binding.noteTitle.getText(RTFormat.HTML).toPlainText().isNotEmpty()) ||
+            (binding.noteContent.getText(RTFormat.HTML).orEmpty() != (note?.content ?: "") &&
+            binding.noteContent.getText(RTFormat.HTML).toPlainText().isNotEmpty())
+        }
+
         val watcher = object : android.text.TextWatcher {
             override fun afterTextChanged(s: android.text.Editable?) {
-                val titleChanged = binding.noteTitle.getText(RTFormat.HTML)
-                    .orEmpty().toPlainText() != (note?.title?.toPlainText() ?: "")
-                val contentChanged = binding.noteContent.getText(RTFormat.HTML)
-                    .orEmpty().toPlainText() != (note?.content?.toPlainText() ?: "")
-                setButtonVisible(titleChanged || contentChanged)
+                val isChanged = {
+                    val title = binding.noteTitle.getText(RTFormat.HTML)
+                    val content = binding.noteContent.getText(RTFormat.HTML)
+                    (title != (note?.title ?: "") && title.toPlainText().isNotEmpty()) ||
+                    (content != (note?.content ?: "") && content.toPlainText().isNotEmpty())
+                }
+                setButtonVisible(isChanged())
             }
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
         }
-        binding.noteTitle.addTextChangedListener(watcher)
-        binding.noteContent.addTextChangedListener(watcher)
+
+        listOf(binding.styleBold, binding.styleItalic, binding.styleUnderline).forEach {
+            it.addOnCheckedChangeListener {  _, _ ->
+                binding.root.post {
+                    setButtonVisible(isChanged())
+                }
+            }
+        }
+
+        listOf(binding.noteTitle, binding.noteContent).forEach {
+            it.addTextChangedListener(watcher)
+        }
     }
 
     private fun setButtonVisible(isChanged: Boolean) {
@@ -217,20 +236,23 @@ class NoteFragment : BaseFragment(R.layout.fragment_note) {
     }
 
     private fun saveNote() {
-        val title = binding.noteTitle.getText(RTFormat.HTML).orEmpty()
-        val content = binding.noteContent.getText(RTFormat.HTML).orEmpty()
-        val titleText = title.toPlainText()
-        val contentText = content.toPlainText()
+        val htmlTitle = binding.noteTitle.getText(RTFormat.HTML)
+        val htmlContent = binding.noteContent.getText(RTFormat.HTML)
+        val title = if (htmlTitle.toPlainText().isBlank()) "" else htmlTitle.trimHtml()
+        val content = if (htmlContent.toPlainText().isBlank()) "" else htmlContent.trimHtml()
+        val time = System.currentTimeMillis()
 
-        if (note == null) {
-            if (titleText.isNotEmpty() || contentText.isNotEmpty()) {
-                viewModel.addNote(title, content, System.currentTimeMillis())
+
+        note?.let {
+            if (note!!.title != htmlTitle || note!!.content != htmlContent) {
+                viewModel.updateNote(
+                    note!!.copy(title = title, content = content, time = time)
+                )
             }
-            return
-        }
-
-        if (note!!.title?.toPlainText() != titleText || note!!.content?.toPlainText() != contentText) {
-            viewModel.updateNote(note!!.copy(title = title, content = content, time = System.currentTimeMillis()))
+        } ?: run {
+            if (htmlTitle.toPlainText().isNotBlank() || htmlContent.toPlainText().isNotBlank()) {
+                viewModel.addNote(title = title, content = content, time = time)
+            }
         }
     }
 
@@ -257,6 +279,8 @@ class NoteFragment : BaseFragment(R.layout.fragment_note) {
         TransitionManager.endTransitions(binding.root.parent as ViewGroup)
         findNavController().popBackStack()
     }
+
+    private fun String.trimHtml() = replace(Regex("(<br\\s*/?>|\\s)+$"), "").trim()
 
     private fun String.toPlainText() = Html.fromHtml(this, Html.FROM_HTML_MODE_COMPACT).toString().trim()
 
