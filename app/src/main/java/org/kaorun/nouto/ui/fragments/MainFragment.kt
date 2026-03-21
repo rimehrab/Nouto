@@ -169,7 +169,7 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
         InsetsHandler.applyViewInsets(
             binding.searchRecyclerView,
             isTopPaddingEnabled = false,
-            isBottomPaddingEnabled = false
+            isBottomPaddingEnabled = true
         )
         InsetsHandler.applyViewInsets(binding.fab, fabMargin)
     }

@@ -1,9 +1,11 @@
 package org.kaorun.nouto.ui.fragments.base
 
 import android.annotation.SuppressLint
+import android.graphics.Typeface
 import android.os.Bundle
 import android.view.Gravity
 import android.view.animation.AnimationUtils
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.transition.Fade
 import androidx.transition.Slide
@@ -92,5 +94,11 @@ abstract class BaseFragment(contentLayoutId: Int) : Fragment(contentLayoutId) {
             duration = durationDisappearing
             interpolator =interpolatorDisappearing
         }
+    }
+
+    protected fun createTypeface() : Typeface {
+        val font = ResourcesCompat
+            .getFont(requireContext(), org.kaorun.nouto.R.font.google_sans_flex_round)
+        return Typeface.create(font, 500, false)
     }
 }

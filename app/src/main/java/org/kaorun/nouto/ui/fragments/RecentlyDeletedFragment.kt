@@ -45,6 +45,10 @@ class RecentlyDeletedFragment : BaseFragment(R.layout.fragment_recently_deleted)
         setupRecyclerView()
         setupInsets()
         setupListeners()
+        binding.collapsingToolbar.apply {
+            setCollapsedTitleTypeface(createTypeface())
+            setExpandedTitleTypeface(createTypeface())
+        }
     }
 
     private fun observeNotes() {
@@ -119,20 +123,6 @@ class RecentlyDeletedFragment : BaseFragment(R.layout.fragment_recently_deleted)
             viewModel.deleteNotes(notes)
         }
     }
-
-//    private fun setupRestoreDialog(note: Note) {
-//        MaterialAlertDialogBuilder(requireContext())
-//            .setIcon(R.drawable.restore_from_trash_24px)
-//            .setTitle(resources.getString(R.string.restore_note_dialog_title))
-//            .setMessage(resources.getString(R.string.restore_note_dialog_message))
-//            .setPositiveButton(resources.getString(R.string.restore)) { _, _ ->
-//                setupRestoreSnackbar(note)
-//            }
-//            .setNeutralButton(resources.getString(R.string.cancel)) { dialog, _ ->
-//                dialog.cancel()
-//            }
-//            .show()
-//    }
 
     private fun openNoteFragment(noteId: Int) {
         TransitionManager.endTransitions(binding.root.parent as ViewGroup)

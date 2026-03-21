@@ -18,6 +18,7 @@
             android:id="@+id/collapsing_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textFontWeight="500"
             app:expandedTitleMarginStart="24dp"
             app:expandedTitleMarginEnd="24dp"
             app:expandedTitleMarginTop="102dp"
