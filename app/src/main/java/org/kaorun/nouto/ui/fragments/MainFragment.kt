@@ -62,8 +62,14 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
 
     private fun observeNotes() {
         viewModel.displayedNotes.observe(viewLifecycleOwner) { notes ->
+            val newNote = notes.firstOrNull { it !in noteAdapter.currentList }
             noteAdapter.submitList(notes.toList()) {
-                binding.recyclerView.post { binding.recyclerView.invalidateItemDecorations() }
+                newNote?.let {
+                    binding.recyclerView.smoothScrollToPosition(notes.indexOf(it))
+                }
+                binding.recyclerView.post {
+                    binding.recyclerView.invalidateItemDecorations()
+                }
             }
             val isSearching = !viewModel.searchQuery.value.isNullOrBlank()
             binding.recyclerView.isInvisible = notes.isEmpty() && isSearching
