@@ -15,7 +15,7 @@ import com.google.android.material.listitem.ListItemLayout
 import com.google.android.material.listitem.SwipeableListItem
 import org.kaorun.nouto.R
 import org.kaorun.nouto.data.Note
-import org.kaorun.nouto.databinding.FragmentRecentlyDeletedBinding
+import org.kaorun.nouto.databinding.FragmentTrashBinding
 import org.kaorun.nouto.ui.adapter.NoteAdapter
 import org.kaorun.nouto.ui.components.DeleteDialog
 import org.kaorun.nouto.ui.components.RestoreSnackbar
@@ -25,8 +25,8 @@ import org.kaorun.nouto.ui.utils.InsetsHandler
 import org.kaorun.nouto.ui.utils.MarginItemDecoration
 import org.kaorun.nouto.viewmodel.NotesViewModel
 
-class RecentlyDeletedFragment : BaseFragment(R.layout.fragment_recently_deleted) {
-    private var _binding: FragmentRecentlyDeletedBinding? = null
+class TrashFragment : BaseFragment(R.layout.fragment_trash) {
+    private var _binding: FragmentTrashBinding? = null
     private val binding get() = _binding!!
     private lateinit var noteAdapter: NoteAdapter
     private val viewModel: NotesViewModel by navGraphViewModels(R.id.nav_graph)
@@ -36,7 +36,7 @@ class RecentlyDeletedFragment : BaseFragment(R.layout.fragment_recently_deleted)
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentRecentlyDeletedBinding.inflate(inflater, container, false)
+        _binding = FragmentTrashBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -127,7 +127,7 @@ class RecentlyDeletedFragment : BaseFragment(R.layout.fragment_recently_deleted)
     private fun openNoteFragment(noteId: Int) {
         TransitionManager.endTransitions(binding.root.parent as ViewGroup)
         findNavController().navigate(
-            RecentlyDeletedFragmentDirections.actionRecentlyDeletedFragmentToNoteFragment(noteId)
+            TrashFragmentDirections.actionTrashFragmentToNoteFragment(noteId)
         )
         binding.fab.hide()
     }

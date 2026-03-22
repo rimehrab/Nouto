@@ -17,8 +17,8 @@
             android:id="@+id/action_mainFragment_to_settingsMainFragment"
             app:destination="@id/settingsMainFragment" />
         <action
-            android:id="@+id/action_mainFragment_to_recentlyDeletedFragment"
-            app:destination="@id/recentlyDeletedFragment" />
+            android:id="@+id/action_mainFragment_to_trashFragment"
+            app:destination="@id/trashFragment" />
     </fragment>
 
     <fragment
@@ -49,12 +49,12 @@
         android:label="SettingsAppearanceFragment"
         tools:layout="@layout/fragment_settings" />
     <fragment
-        android:id="@+id/recentlyDeletedFragment"
-        android:name="org.kaorun.nouto.ui.fragments.RecentlyDeletedFragment"
-        android:label="RecentlyDeletedFragment"
-        tools:layout="@layout/fragment_recently_deleted">
+        android:id="@+id/trashFragment"
+        android:name="org.kaorun.nouto.ui.fragments.TrashFragment"
+        android:label="trashFragment"
+        tools:layout="@layout/fragment_trash">
         <action
-            android:id="@+id/action_recentlyDeletedFragment_to_noteFragment"
+            android:id="@+id/action_trashFragment_to_noteFragment"
             app:destination="@id/noteFragment" />
     </fragment>
     <fragment

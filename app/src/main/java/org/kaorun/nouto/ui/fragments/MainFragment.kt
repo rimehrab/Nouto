@@ -146,7 +146,7 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
             when (menuItem.itemId) {
                 R.id.trash -> {
                     sideSheetDialog.dismiss()
-                    openRecentlyDeletedFragment()
+                    openTrashFragment()
                 }
                 R.id.settings -> {
                     sideSheetDialog.dismiss()
@@ -233,10 +233,10 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
         )
     }
 
-    private fun openRecentlyDeletedFragment() {
+    private fun openTrashFragment() {
         TransitionManager.endTransitions(binding.root.parent as ViewGroup)
         findNavController().navigate(
-            MainFragmentDirections.actionMainFragmentToRecentlyDeletedFragment()
+            MainFragmentDirections.actionMainFragmentToTrashFragment()
         )
         binding.fab.hide()
     }
