@@ -36,12 +36,12 @@ git clone https://github.com/kaorun/nouto.git
 4. Swipe a note to delete, or use the Trash screen to recover it
 
 ## ⚖️ License
-This project is licensed under the MIT License
+This project is licensed under the [MIT License](LICENSE)
 
 ## 📧 Contact
 Feel free to reach out with questions or suggestions:
 * Email: hotarunichijou@ik.me
-* Telegram: @KaorunIchijou
+* Telegram: [@KaorunIchijou](https://t.me/KaorunIchijou)
 
 ## 🙌 Special thanks to:  
-- [1gravity](https://github.com/1gravity) for creating native [rich text library](https://github.com/1gravity/Android-RTEditor)
+[1gravity](https://github.com/1gravity) for creating native [rich text library](https://github.com/1gravity/Android-RTEditor)
