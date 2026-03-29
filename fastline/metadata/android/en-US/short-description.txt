@@ -1,0 +1,1 @@
+Android app for taking notes with Rich Text Editor features support
