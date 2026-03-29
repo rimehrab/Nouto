@@ -23,9 +23,9 @@ class MarginItemDecoration(
 
         outRect.top = if (position < spanCount) {
             if (isTopMargin) outerSpaceSize else 0
-        } else innerSpaceSize
+        } else innerSpaceSize / 2
         outRect.left = if (column == 0) outerSpaceSize else innerSpaceSize / 2
         outRect.right = if (column == spanCount - 1) outerSpaceSize else innerSpaceSize / 2
-        outRect.bottom = if (position >= itemCount - spanCount) outerSpaceSize else 0
+        outRect.bottom = if (position == itemCount - 1) outerSpaceSize else innerSpaceSize / 2
     }
 }
