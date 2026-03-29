@@ -1,4 +1,4 @@
-# 📝 Nouto
+# Nouto
 
 Nouto is a simple and elegant notes app built in Kotlin with Material 3 Expressive Design. It focuses heavily on user experience — fluid transitions, intuitive gestures, and a clean interface that stays out of your way.
 
@@ -11,7 +11,9 @@ Nouto is a simple and elegant notes app built in Kotlin with Material 3 Expressi
 * **Offline-first:** Everything is stored locally — no account required, no network calls
 
 ## 🎨 Screenshots
-*Coming soon.*
+| ![Screenshot 1](fastline/metadata/android/en-US/images/phoneScreenshots/1.png) | ![Screenshot 2](fastline/metadata/android/en-US/images/phoneScreenshots/2.png) | ![Screenshot 3](fastline/metadata/android/en-US/images/phoneScreenshots/3.png)
+|---                                                     |---                                                     |---   
+| ![Screenshot 4](fastline/metadata/android/en-US/images/phoneScreenshots/4.png) | ![Screenshot 5](fastline/metadata/android/en-US/images/phoneScreenshots/5.png) | ![Screenshot 6](fastline/metadata/android/en-US/images/phoneScreenshots/6.png)           
 
 ## 📲 Installation
 1. Clone this repository:
