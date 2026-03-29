@@ -15,7 +15,7 @@ Nouto is a simple and elegant notes app built in Kotlin with Material 3 Expressi
 |---                                                     |---                                                     |---   
 | ![Screenshot 4](fastline/metadata/android/en-US/images/phoneScreenshots/4.png) | ![Screenshot 5](fastline/metadata/android/en-US/images/phoneScreenshots/5.png) | ![Screenshot 6](fastline/metadata/android/en-US/images/phoneScreenshots/6.png)           
 
-## 📲 Installation
+## 🧰 Build instructions
 1. Clone this repository:
 ```
 git clone https://github.com/kaorun/nouto.git
@@ -30,12 +30,6 @@ git clone https://github.com/kaorun/nouto.git
 * **Architecture:** MVVM + LiveData
 * **Navigation:** Navigation Component + Safe Args
 * **Database:** Room (SQLite)
-
-## 🚀 Usage
-1. Open the app
-2. Tap the FAB to create a new note
-3. Write your note and tap back to save
-4. Swipe a note to delete, or use the Trash screen to recover it
 
 ## ⚖️ License
 This project is licensed under the [MIT License](LICENSE)
