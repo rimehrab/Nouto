@@ -1,5 +1,10 @@
 # Nouto
 
+[![Release](https://img.shields.io/github/v/release/HotarunIchijou/Nouto?display_name=tag&style=for-the-badge)](https://github.com/HotarunIchijou/Nouto/releases/latest)
+[![Build](https://img.shields.io/github/actions/workflow/status/HotarunIchijou/nouto/build.yml?branch=master&style=for-the-badge)](https://github.com/HotarunIchijou/Nouto/actions)
+[![License](https://img.shields.io/github/license/HotarunIchijou/Nouto?style=for-the-badge)](/LICENSE)
+
+
 Nouto is a simple and elegant notes app built in Kotlin with Material 3 Expressive Design. It focuses heavily on user experience — fluid transitions, intuitive gestures, and a clean interface that stays out of your way.
 
 ## ✨ Key features
@@ -9,6 +14,10 @@ Nouto is a simple and elegant notes app built in Kotlin with Material 3 Expressi
 * **Predictive back gestures:** Full support for Android 14+ predictive back navigation
 * **Dynamic color:** Picks up your wallpaper's color scheme on Android 12+ via Material You
 * **Offline-first:** Everything is stored locally — no account required, no network calls
+
+## ⬇️ Downloads
+[<img src="https://gitlab.com/IzzyOnDroid/repo/-/raw/master/assets/IzzyOnDroid.png" height="90" alt="Get it on IzzyOnDroid">](https://apt.izzysoft.de/fdroid/index/apk/org.kaorun.nouto)
+[<img src="https://github.com/HotarunIchijou/Nouto/blob/8f01ad03341048cf3258f39575d34a1a66c62121/assets/badges/get-it-on-github.png" height="90" alt="Get it on GitHub">](https://github.com/HotarunIchijou/Nouto/releases/latest)
 
 ## 🎨 Screenshots
 | ![Screenshot 1](fastline/metadata/android/en-US/images/phoneScreenshots/1.png) | ![Screenshot 2](fastline/metadata/android/en-US/images/phoneScreenshots/2.png) | ![Screenshot 3](fastline/metadata/android/en-US/images/phoneScreenshots/3.png)
@@ -30,9 +39,6 @@ git clone https://github.com/kaorun/nouto.git
 * **Architecture:** MVVM + LiveData
 * **Navigation:** Navigation Component + Safe Args
 * **Database:** Room (SQLite)
-
-## ⚖️ License
-This project is licensed under the [MIT License](LICENSE)
 
 ## 📧 Contact
 Feel free to reach out with questions or suggestions:
