@@ -12,17 +12,19 @@ object InsetsHandler {
     fun applyViewInsets(
         view: View,
         isTopPaddingEnabled: Boolean = true,
-        isBottomPaddingEnabled: Boolean = true) {
+        isBottomPaddingEnabled: Boolean = true,
+        additionalMargin: Int? = null) {
         ViewCompat.setOnApplyWindowInsetsListener(view) { v, insets ->
             val systemBars = insets.getInsets(
                 WindowInsetsCompat.Type.systemBars() or
                         WindowInsetsCompat.Type.displayCutout()
             )
+            val margin = additionalMargin ?: 0
             v.setPadding(
                 systemBars.left,
                 if (isTopPaddingEnabled) systemBars.top else 0,
                 systemBars.right,
-                if (isBottomPaddingEnabled) systemBars.bottom else 0
+                if (isBottomPaddingEnabled) systemBars.bottom + margin  else 0
             )
             insets
         }

@@ -196,11 +196,21 @@ class NoteFragment : BaseFragment(R.layout.fragment_note) {
 
     private fun setupInsets() {
         InsetsHandler.applyViewInsets(
-            binding.appBarLayout,
+            view = binding.appBarLayout,
             isTopPaddingEnabled = true,
-            isBottomPaddingEnabled = false
+            isBottomPaddingEnabled = false,
         )
-        InsetsHandler.applyViewInsets(binding.contentContainer, false)
+        InsetsHandler.applyViewInsets(
+            view = binding.contentContainer,
+            isTopPaddingEnabled = false,
+            isBottomPaddingEnabled = true
+        )
+        InsetsHandler.applyViewInsets(
+            view = binding.noteContent,
+            isTopPaddingEnabled = false,
+            isBottomPaddingEnabled = true,
+            additionalMargin = resources.getDimensionPixelSize(R.dimen.note_container_bottom_margin)
+        )
         InsetsHandler.applyImeInsets(binding.scrollView)
 
         (enterTransition as? androidx.transition.Transition)?.addListener(
