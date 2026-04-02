@@ -51,4 +51,6 @@
     <string name="contact_developer_summary">Give feedback to developer via Telegram</string>
     <string name="language">Language</string>
     <string name="language_summary">Choose the language of application</string>
+    <string name="dynamic_colors">Dynamic colors</string>
+    <string name="dynamic_colors_summary">Colors based on your wallpaper</string>
 </resources>

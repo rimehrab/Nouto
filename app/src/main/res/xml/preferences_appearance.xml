@@ -17,8 +17,8 @@
         <org.kaorun.nouto.ui.components.MaterialSwitchPreferenceCompat
             android:key="dynamic_colors"
             android:icon="@drawable/colors_24px"
-            android:title="Dynamic colors"
-            android:summary="Colors based on your wallpaper"
+            android:title="@string/dynamic_colors"
+            android:summary="@string/dynamic_colors_summary"
             android:defaultValue="true" />
     </PreferenceCategory>
 </PreferenceScreen>
