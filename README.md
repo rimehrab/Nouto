@@ -24,6 +24,9 @@ Nouto is a simple and elegant notes app built in Kotlin with Material 3 Expressi
 |--------------------------------------------------------------------------------|--------------------------------------------------------------------------------|--------------------------------------------------------------------------------|
 | ![Screenshot 4](fastlane/metadata/android/en-US/images/phoneScreenshots/4.png) | ![Screenshot 5](fastlane/metadata/android/en-US/images/phoneScreenshots/5.png) | ![Screenshot 6](fastlane/metadata/android/en-US/images/phoneScreenshots/6.png) |
 
+## 🌍 Translation
+[![Translation status](https://hosted.weblate.org/widget/nouto/287x66-grey.png)](https://hosted.weblate.org/engage/nouto/)
+
 ## 🧰 Build instructions
 1. Clone this repository:
 ```
