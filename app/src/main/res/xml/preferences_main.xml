@@ -7,6 +7,12 @@
         android:summary="@string/appearance_summary" />
 
     <Preference
+        android:key="screen_language"
+        android:icon="@drawable/language_24px"
+        android:title="@string/language"
+        android:summary="@string/language_summary" />
+
+    <Preference
         android:key="screen_about"
         android:icon="@drawable/info_24px"
         android:title="@string/about"

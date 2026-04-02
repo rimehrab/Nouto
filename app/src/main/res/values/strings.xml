@@ -49,4 +49,6 @@
     <string name="source_code_summary">Project repository on GitHub</string>
     <string name="contact_developer">Contact developer</string>
     <string name="contact_developer_summary">Give feedback to developer via Telegram</string>
+    <string name="language">Language</string>
+    <string name="language_summary">Choose the language of application</string>
 </resources>
