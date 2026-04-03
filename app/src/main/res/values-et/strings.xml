@@ -1,3 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="save">Salvesta</string>
+    <string name="title">Pealkiri</string>
+    <string name="notes_hint">Sisesta oma märkmed siia</string>
+    <string name="delete">Kustuta</string>
+    <string name="add_note">Lisa märge</string>
+    <string name="searchbar_hint">Otsi</string>
 </resources>
