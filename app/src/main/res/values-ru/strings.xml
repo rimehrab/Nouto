@@ -47,11 +47,4 @@
     <string name="source_code_summary">Репозиторий проекта на GitHub</string>
     <string name="contact_developer">Связь с разработчиком</string>
     <string name="contact_developer_summary">Оставить отзыв разработчику в Telegram</string>
-    <string name="repository_link" translatable="false"></string>
-    <string name="telegram_link" translatable="false"></string>
-    <string name="language_summary"></string>
-    <string name="dynamic_colors"></string>
-    <string name="dynamic_colors_summary"></string>
-    <string name="language"></string>
-    <string name="app_name" translatable="false"></string>
 </resources>

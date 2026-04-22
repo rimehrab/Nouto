@@ -14,44 +14,4 @@
     <string name="notes">নোট</string>
     <string name="settings">সেটিংস</string>
     <string name="search_delete_button_description">সাজেশন মুছে ফেলুন</string>
-    <string name="appearance"></string>
-    <string name="appearance_summary"></string>
-    <string name="about"></string>
-    <string name="about_summary"></string>
-    <string name="theme"></string>
-    <string name="theme_light"></string>
-    <string name="theme_dark"></string>
-    <string name="theme_system"></string>
-    <string name="okay"></string>
-    <string name="cancel"></string>
-    <string name="notes_empty"></string>
-    <string name="nothing_found"></string>
-    <string name="note_deleted_message"></string>
-    <string name="trash"></string>
-    <string name="there_are_no_deleted_notes"></string>
-    <string name="delete_note_dialog_title"></string>
-    <string name="delete_note_dialog_message"></string>
-    <string name="undo"></string>
-    <string name="note_restored_message"></string>
-    <string name="delete_notes_dialog_title"></string>
-    <string name="delete_notes_dialog_message"></string>
-    <string name="type_to_start_search"></string>
-    <string name="restore_note_dialog_title"></string>
-    <string name="restore_note_dialog_message"></string>
-    <string name="restore"></string>
-    <string name="theming"></string>
-    <string name="app_icon"></string>
-    <string name="the_best_app_for_taking_notes"></string>
-    <string name="version"></string>
-    <string name="source_code"></string>
-    <string name="source_code_summary"></string>
-    <string name="contact_developer"></string>
-    <string name="contact_developer_summary"></string>
-    <string name="language"></string>
-    <string name="language_summary"></string>
-    <string name="dynamic_colors"></string>
-    <string name="dynamic_colors_summary"></string>
-    <string name="repository_link" translatable="false"></string>
-    <string name="telegram_link" translatable="false"></string>
-    <string name="app_name" translatable="false"></string>
 </resources>
