@@ -6,4 +6,52 @@
     <string name="delete">Kustuta</string>
     <string name="add_note">Lisa märge</string>
     <string name="searchbar_hint">Otsi</string>
+    <string name="theme_light"></string>
+    <string name="repository_link" translatable="false"></string>
+    <string name="delete_note_dialog_title"></string>
+    <string name="appearance_summary"></string>
+    <string name="notes_empty"></string>
+    <string name="navigation_drawer_description"></string>
+    <string name="trash"></string>
+    <string name="theme_dark"></string>
+    <string name="theme_system"></string>
+    <string name="restore"></string>
+    <string name="restore_note_dialog_title"></string>
+    <string name="theme"></string>
+    <string name="appearance"></string>
+    <string name="app_icon"></string>
+    <string name="source_code"></string>
+    <string name="telegram_link" translatable="false"></string>
+    <string name="notes"></string>
+    <string name="version"></string>
+    <string name="language_summary"></string>
+    <string name="delete_note_dialog_message"></string>
+    <string name="contact_developer"></string>
+    <string name="dynamic_colors"></string>
+    <string name="dynamic_colors_summary"></string>
+    <string name="search_delete_button_description"></string>
+    <string name="about"></string>
+    <string name="undo"></string>
+    <string name="restore_note_dialog_message"></string>
+    <string name="delete_notes_dialog_title"></string>
+    <string name="source_code_summary"></string>
+    <string name="about_summary"></string>
+    <string name="cancel"></string>
+    <string name="nothing_found"></string>
+    <string name="theming"></string>
+    <string name="note_deleted_message"></string>
+    <string name="language"></string>
+    <string name="okay"></string>
+    <string name="contact_developer_summary"></string>
+    <string name="layout_switch_description"></string>
+    <string name="settings"></string>
+    <string name="italic_style_description"></string>
+    <string name="bold_style_description"></string>
+    <string name="the_best_app_for_taking_notes"></string>
+    <string name="underline_style_description"></string>
+    <string name="app_name" translatable="false"></string>
+    <string name="note_restored_message"></string>
+    <string name="delete_notes_dialog_message"></string>
+    <string name="type_to_start_search"></string>
+    <string name="there_are_no_deleted_notes"></string>
 </resources>
