@@ -27,9 +27,9 @@
                 android:layout_weight="1"
                 android:minHeight="?attr/actionBarSize"
                 android:paddingStart="16dp"
-                android:paddingEnd="8dp"
                 android:theme="@style/ThemeOverlay.CircleNavigationButton"
-                app:navigationIcon="@drawable/arrow_back_24px">
+                app:navigationIcon="@drawable/arrow_back_24px"
+                tools:ignore="RtlSymmetry">
 
                 <com.google.android.material.button.MaterialButtonGroup
                     android:id="@+id/button_group"
@@ -80,6 +80,7 @@
                         style="@style/Widget.Material3Expressive.Button.IconButton.Filled"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:contentDescription="@string/open_menu"
                         app:icon="@drawable/more_vert_24px"
                         app:backgroundTint="?colorSurfaceContainerHighest"
                         app:iconTint="?colorOnSurfaceVariant"
