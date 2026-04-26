@@ -53,4 +53,10 @@
     <string name="language_summary">Choose the language of application</string>
     <string name="dynamic_colors">Dynamic colors</string>
     <string name="dynamic_colors_summary">Colors based on your wallpaper</string>
+    <string name="pure_black_theme">Pure black theme</string>
+    <string name="pure_black_theme_summary">Make the app background black</string>
+    <string name="pin">Pin</string>
+    <string name="unpin">Unpin</string>
+    <string name="note_pinned_message">Note has been pinned</string>
+    <string name="note_unpinned_message">Note has been unpinned</string>
 </resources>

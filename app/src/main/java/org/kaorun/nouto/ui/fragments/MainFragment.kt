@@ -25,8 +25,8 @@ import org.kaorun.nouto.R
 import org.kaorun.nouto.data.Note
 import org.kaorun.nouto.databinding.FragmentMainBinding
 import org.kaorun.nouto.ui.adapter.NoteAdapter
-import org.kaorun.nouto.ui.components.DeleteSnackbar
 import org.kaorun.nouto.ui.components.MainSearchView
+import org.kaorun.nouto.ui.components.SnackbarWithUndo
 import org.kaorun.nouto.ui.fragments.base.BaseFragment
 import org.kaorun.nouto.ui.model.LayoutMode
 import org.kaorun.nouto.ui.utils.InsetsHandler
@@ -221,9 +221,14 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
 
     private fun setupSnackbar(note: Note) {
        viewModel.markDeleted(note)
-        DeleteSnackbar.show(binding.root, binding.fab) {
-            viewModel.unmarkDeleted(note)
-        }
+        SnackbarWithUndo.show(
+            view = binding.root,
+            anchorView = binding.fab,
+            message = getString(R.string.note_deleted_message),
+            undoAction = {
+                viewModel.unmarkDeleted(note)
+            }
+        )
     }
 
     private fun openNoteFragment(noteId: Int?) {

@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <style name="ThemeOverlay.Popup" parent="">
+        <item name="android:popupMenuStyle">@style/Widget.Custom.PopupMenu</item>
+        <item name="android:listPopupWindowStyle">@style/Widget.Custom.PopupMenu</item>
+    </style>
+
     <style name="ThemeOverlay.CircleNavigationButton" parent="ThemeOverlay.Material3.Toolbar.CircleNavigationButton">
         <item name="toolbarNavigationButtonCircleColor">?colorSurfaceContainerHighest</item>
     </style>

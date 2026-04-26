@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Widget.Custom.PopupMenu" parent="Widget.Material3.PopupMenu">
+        <item name="android:popupBackground">@drawable/bg_popup_menu</item>
+    </style>
 
     <style name="Widget.Material3.ListItemCardView.Segmented" parent="" tools:override="true">
         <item name="cardBackgroundColor">@color/segmented_list_item_background</item>

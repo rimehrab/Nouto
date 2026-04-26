@@ -1,16 +1,21 @@
 package org.kaorun.nouto.ui.fragments
 
 import android.os.Bundle
+import android.text.Editable
 import android.text.Html
+import android.text.TextWatcher
+import android.view.ContextThemeWrapper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.PopupMenu
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.navigation.navGraphViewModels
+import androidx.transition.Transition
 import androidx.transition.TransitionManager
 import com.google.android.material.transition.MaterialFade
 import com.onegravity.rteditor.RTManager
@@ -22,7 +27,7 @@ import org.kaorun.nouto.R
 import org.kaorun.nouto.data.Note
 import org.kaorun.nouto.databinding.FragmentNoteBinding
 import org.kaorun.nouto.ui.components.DeleteDialog
-import org.kaorun.nouto.ui.components.RestoreSnackbar
+import org.kaorun.nouto.ui.components.SnackbarWithUndo
 import org.kaorun.nouto.ui.components.TextStyleFloatingToolbar
 import org.kaorun.nouto.ui.fragments.base.BaseFragment
 import org.kaorun.nouto.ui.utils.InsetsHandler
@@ -122,33 +127,84 @@ class NoteFragment : BaseFragment(R.layout.fragment_note) {
             isRestoring = true
             binding.floatingToolbar.isVisible = true
             viewModel.unmarkDeleted(note!!)
-            setupRestoreSnackbar(note)
+            setupRestoreSnackbar(note!!)
         }
 
-        binding.topAppBar.setOnMenuItemClickListener { item ->
-            when (item.itemId) {
-                R.id.delete -> {
-                    note?.let {
-                        isDeleting = true
-                        viewModel.setPendingDelete(it)
-                        closeNoteFragment()
-                    } ?: run {
-                        DeleteDialog.show(requireContext(), resources) {
-                            isDeleting = true
-                            closeNoteFragment()
-                        }
-                    }
-                    true
+        binding.buttonMenu.setOnClickListener { view ->
+            val wrapper = ContextThemeWrapper(requireContext(), R.style.ThemeOverlay_Popup)
+            val popup = PopupMenu(wrapper, view)
+            popup.menuInflater.inflate(R.menu.appbar, popup.menu)
+
+            val pinMenuItem = popup.menu.findItem(R.id.pin)
+            note?.let {
+                if (it.isPinned) {
+                    pinMenuItem.title = getString(R.string.unpin)
+                    pinMenuItem.setIcon(R.drawable.keep_off_24px)
+                } else {
+                    pinMenuItem.title = getString(R.string.pin)
+                    pinMenuItem.setIcon(R.drawable.keep_24px)
                 }
-                else -> false
             }
+
+            popup.setForceShowIcon(true)
+
+            popup.setOnMenuItemClickListener { item ->
+                when (item.itemId) {
+                    R.id.pin -> {
+                        if (note == null) {
+                            saveNote()
+                            isSaved = true
+                        }
+                        setupPinSnackbar(note!!)
+                        val updatedNote = note!!.copy(isPinned = !note!!.isPinned)
+                        viewModel.updateNote(updatedNote)
+                        true
+                    }
+                    R.id.delete -> {
+                        note?.let {
+                            isDeleting = true
+                            viewModel.setPendingDelete(it)
+                            closeNoteFragment()
+                        } ?: run {
+                            DeleteDialog.show(requireContext(), resources) {
+                                isDeleting = true
+                                closeNoteFragment()
+                            }
+                        }
+                        true
+                    }
+                    else -> false
+                }
+            }
+
+            popup.show()
         }
     }
 
-    private fun setupRestoreSnackbar(note: Note?) {
-        RestoreSnackbar.show(binding.root, binding.floatingToolbar) {
-            viewModel.markDeleted(note!!)
-        }
+    private fun setupRestoreSnackbar(note: Note) {
+        SnackbarWithUndo.show(
+            view = binding.root,
+            anchorView = binding.floatingToolbar,
+            message = getString(R.string.note_restored_message),
+            undoAction = {
+                viewModel.markDeleted(note)
+            }
+        )
+    }
+
+    private fun setupPinSnackbar(note: Note) {
+        val messageRes = if (note.isPinned) {
+            R.string.note_unpinned_message
+        } else R.string.note_pinned_message
+        SnackbarWithUndo.show(
+            view = binding.root,
+            anchorView = binding.floatingToolbar,
+            message = getString(messageRes),
+            undoAction = {
+                val updatedNote = note.copy(isPinned = !note.isPinned)
+                viewModel.updateNote(updatedNote)
+            }
+        )
     }
 
     private fun setupChangeListener() {
@@ -159,8 +215,8 @@ class NoteFragment : BaseFragment(R.layout.fragment_note) {
             binding.noteContent.getText(RTFormat.HTML).toPlainText().isNotEmpty())
         }
 
-        val watcher = object : android.text.TextWatcher {
-            override fun afterTextChanged(s: android.text.Editable?) {
+        val watcher = object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
                 val isChanged = {
                     val title = binding.noteTitle.getText(RTFormat.HTML)
                     val content = binding.noteContent.getText(RTFormat.HTML)
@@ -213,17 +269,17 @@ class NoteFragment : BaseFragment(R.layout.fragment_note) {
         )
         InsetsHandler.applyImeInsets(binding.scrollView)
 
-        (enterTransition as? androidx.transition.Transition)?.addListener(
-            object : androidx.transition.Transition.TransitionListener {
-                override fun onTransitionEnd(transition: androidx.transition.Transition) {
+        (enterTransition as? Transition)?.addListener(
+            object : Transition.TransitionListener {
+                override fun onTransitionEnd(transition: Transition) {
                     InsetsHandler.applyImeInsets(binding.floatingToolbar)
                 }
-                override fun onTransitionStart(transition: androidx.transition.Transition) {}
-                override fun onTransitionCancel(transition: androidx.transition.Transition) {
+                override fun onTransitionStart(transition: Transition) {}
+                override fun onTransitionCancel(transition: Transition) {
                     InsetsHandler.applyImeInsets(binding.floatingToolbar)
                 }
-                override fun onTransitionPause(transition: androidx.transition.Transition) {}
-                override fun onTransitionResume(transition: androidx.transition.Transition) {}
+                override fun onTransitionPause(transition: Transition) {}
+                override fun onTransitionResume(transition: Transition) {}
             }
         ) ?: InsetsHandler.applyImeInsets(binding.floatingToolbar)
     }
@@ -237,7 +293,6 @@ class NoteFragment : BaseFragment(R.layout.fragment_note) {
         binding.floatingToolbar.isVisible = !isDeleted
         binding.buttonGroup.isVisible = isDeleted
 
-        binding.topAppBar.menu.findItem(R.id.delete).isVisible = !isDeleted
         binding.noteTitle.isEnabled = !isDeleted
         binding.noteContent.isEnabled = !isDeleted
         if (!isDeleted && isShowKeyboard) showKeyboard()

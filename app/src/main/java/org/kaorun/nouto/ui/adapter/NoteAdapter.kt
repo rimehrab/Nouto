@@ -60,6 +60,25 @@ class NoteAdapter(
                 HtmlCompat.FROM_HTML_MODE_COMPACT
             )
 
+            if (note.isPinned && !note.isDeleted) {
+                binding.cardView.setCardBackgroundColor(
+                    ColorStateList.valueOf(
+                    MaterialColors.getColor(
+                        binding.cardView,
+                        com.google.android.material.R.attr.colorSecondaryContainer
+                        )
+                    )
+                )
+                binding.noteTitle.setTextColor(
+                    ColorStateList.valueOf(
+                        MaterialColors.getColor(
+                            binding.noteTitle,
+                            com.google.android.material.R.attr.colorOnSecondaryContainer
+                        )
+                    )
+                )
+            }
+
             if (onRestoreClick != null) {
                 binding.buttonStart.setIconResource(R.drawable.delete_forever_24px)
                 binding.buttonEnd.setIconResource(R.drawable.restore_from_trash_24px)

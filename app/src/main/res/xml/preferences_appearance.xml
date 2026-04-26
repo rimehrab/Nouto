@@ -15,6 +15,13 @@
             app:useSimpleSummaryProvider="true" />
 
         <org.kaorun.nouto.ui.components.MaterialSwitchPreferenceCompat
+            android:key="black_theme"
+            android:icon="@drawable/contrast_24px"
+            android:title="@string/pure_black_theme"
+            android:summary="@string/pure_black_theme_summary"
+            android:defaultValue="false" />
+
+        <org.kaorun.nouto.ui.components.MaterialSwitchPreferenceCompat
             android:key="dynamic_colors"
             android:icon="@drawable/colors_24px"
             android:title="@string/dynamic_colors"
