@@ -247,7 +247,7 @@ class NoteFragment : BaseFragment(R.layout.fragment_note) {
             duration = if (isChanged) 150L else 84L
         }
         TransitionManager.beginDelayedTransition(binding.root, fade)
-        binding.buttonSave.isVisible = isChanged
+        binding.buttonSave.visibility = if (isChanged) View.VISIBLE else View.INVISIBLE
     }
 
     private fun setupInsets() {
@@ -291,8 +291,8 @@ class NoteFragment : BaseFragment(R.layout.fragment_note) {
         else false
 
         binding.floatingToolbar.isVisible = !isDeleted
+        binding.buttonGroupMenu.isVisible = !isDeleted
         binding.buttonGroup.isVisible = isDeleted
-
         binding.noteTitle.isEnabled = !isDeleted
         binding.noteContent.isEnabled = !isDeleted
         if (!isDeleted && isShowKeyboard) showKeyboard()
