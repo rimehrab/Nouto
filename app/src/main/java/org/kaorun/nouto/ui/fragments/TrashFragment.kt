@@ -104,7 +104,7 @@ class TrashFragment : BaseFragment(R.layout.fragment_trash) {
     }
 
     private fun setupListeners() {
-        binding.toolbar.setNavigationOnClickListener { closeRecentlyDeletedFragment() }
+        binding.toolbar.setNavigationOnClickListener { closeTrashFragment() }
         binding.fab.setOnClickListener { setupDeleteDialog(noteAdapter.currentList) }
     }
 
@@ -135,8 +135,7 @@ class TrashFragment : BaseFragment(R.layout.fragment_trash) {
         binding.fab.hide()
     }
 
-    private fun closeRecentlyDeletedFragment() {
-        TransitionManager.endTransitions(binding.root.parent as ViewGroup)
+    private fun closeTrashFragment() {
         findNavController().popBackStack()
         binding.fab.hide()
     }

@@ -7,7 +7,9 @@ plugins {
 android {
     namespace = "org.kaorun.nouto"
     compileSdk {
-        version = release(36)
+        version = release(36) {
+            minorApiLevel = 1
+        }
     }
 
     defaultConfig {
@@ -64,5 +66,6 @@ dependencies {
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.androidx.preference)
+    implementation(libs.androidx.transition)
     ksp(libs.androidx.room.compiler)
 }
