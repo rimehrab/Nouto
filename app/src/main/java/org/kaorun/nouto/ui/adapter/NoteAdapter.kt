@@ -77,6 +77,23 @@ class NoteAdapter(
                         )
                     )
                 )
+            } else {
+                binding.cardView.setCardBackgroundColor(
+                    ColorStateList.valueOf(
+                        MaterialColors.getColor(
+                            binding.cardView,
+                            com.google.android.material.R.attr.colorSurfaceBright
+                        )
+                    )
+                )
+                binding.noteTitle.setTextColor(
+                    ColorStateList.valueOf(
+                        MaterialColors.getColor(
+                            binding.noteTitle,
+                            com.google.android.material.R.attr.colorOnSurface
+                        )
+                    )
+                )
             }
 
             if (onRestoreClick != null) {

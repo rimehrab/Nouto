@@ -1,5 +1,6 @@
 package org.kaorun.nouto.data
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
@@ -11,5 +12,5 @@ data class Note(
     val content: String?,
     val time: Long,
     val isDeleted: Boolean = false,
-    val isPinned: Boolean = false
+    @ColumnInfo(defaultValue = "0") val isPinned: Boolean = false
 )

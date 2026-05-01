@@ -43,6 +43,7 @@ class NoteFragment : BaseFragment(R.layout.fragment_note) {
     private var isDeleting = false
     private var isSaved = false
     private var isRestoring = false
+    private var isPinned = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -83,6 +84,7 @@ class NoteFragment : BaseFragment(R.layout.fragment_note) {
                     binding.noteTitle.setRichTextEditing(true, it.title)
                     binding.noteContent.setRichTextEditing(true, it.content)
                     binding.noteTitle.setSelection(binding.noteTitle.text?.length ?: 0)
+                    isPinned = it.isPinned
                     updateUIState(note, !isRestoring)
                 }
             }
@@ -136,14 +138,12 @@ class NoteFragment : BaseFragment(R.layout.fragment_note) {
             popup.menuInflater.inflate(R.menu.appbar, popup.menu)
 
             val pinMenuItem = popup.menu.findItem(R.id.pin)
-            note?.let {
-                if (it.isPinned) {
-                    pinMenuItem.title = getString(R.string.unpin)
-                    pinMenuItem.setIcon(R.drawable.keep_off_24px)
-                } else {
-                    pinMenuItem.title = getString(R.string.pin)
-                    pinMenuItem.setIcon(R.drawable.keep_24px)
-                }
+            if (isPinned) {
+                pinMenuItem.title = getString(R.string.unpin)
+                pinMenuItem.setIcon(R.drawable.keep_off_24px)
+            } else {
+                pinMenuItem.title = getString(R.string.pin)
+                pinMenuItem.setIcon(R.drawable.keep_24px)
             }
 
             popup.setForceShowIcon(true)
@@ -151,13 +151,8 @@ class NoteFragment : BaseFragment(R.layout.fragment_note) {
             popup.setOnMenuItemClickListener { item ->
                 when (item.itemId) {
                     R.id.pin -> {
-                        if (note == null) {
-                            saveNote()
-                            isSaved = true
-                        }
-                        setupPinSnackbar(note!!)
-                        val updatedNote = note!!.copy(isPinned = !note!!.isPinned)
-                        viewModel.updateNote(updatedNote)
+                        setupPinSnackbar()
+                        isPinned = !isPinned
                         true
                     }
                     R.id.delete -> {
@@ -192,17 +187,17 @@ class NoteFragment : BaseFragment(R.layout.fragment_note) {
         )
     }
 
-    private fun setupPinSnackbar(note: Note) {
-        val messageRes = if (note.isPinned) {
+    private fun setupPinSnackbar() {
+        val messageRes = if (isPinned) {
             R.string.note_unpinned_message
         } else R.string.note_pinned_message
+
         SnackbarWithUndo.show(
             view = binding.root,
             anchorView = binding.floatingToolbar,
             message = getString(messageRes),
             undoAction = {
-                val updatedNote = note.copy(isPinned = !note.isPinned)
-                viewModel.updateNote(updatedNote)
+                isPinned = !isPinned
             }
         )
     }
@@ -309,14 +304,14 @@ class NoteFragment : BaseFragment(R.layout.fragment_note) {
 
 
         note?.let {
-            if (note!!.title != htmlTitle || note!!.content != htmlContent) {
+            if (note!!.title != htmlTitle || note!!.content != htmlContent || it.isPinned != isPinned) {
                 viewModel.updateNote(
-                    note!!.copy(title = title, content = content, time = time)
+                    note!!.copy(title = title, content = content, time = time, isPinned = isPinned)
                 )
             }
         } ?: run {
             if (htmlTitle.toPlainText().isNotBlank() || htmlContent.toPlainText().isNotBlank()) {
-                viewModel.addNote(title = title, content = content, time = time)
+                viewModel.addNote(title = title, content = content, time = time, isPinned = isPinned)
             }
         }
     }
@@ -341,6 +336,8 @@ class NoteFragment : BaseFragment(R.layout.fragment_note) {
     }
 
     private fun closeNoteFragment() {
+        saveNote()
+        isSaved = true
         TransitionManager.endTransitions(binding.root.parent as ViewGroup)
         findNavController().popBackStack()
     }

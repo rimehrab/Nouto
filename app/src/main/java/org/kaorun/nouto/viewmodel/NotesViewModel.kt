@@ -48,7 +48,8 @@ class NotesViewModel(application: Application) : AndroidViewModel(application) {
     fun addNote(
         title: String?,
         content: String?,
-        time: Long = System.currentTimeMillis()
+        time: Long = System.currentTimeMillis(),
+        isPinned: Boolean = false
     ) {
         if (title.isNullOrBlank() && content.isNullOrBlank()) return
         viewModelScope.launch {
@@ -56,7 +57,8 @@ class NotesViewModel(application: Application) : AndroidViewModel(application) {
                 Note(
                     title = title,
                     content = content,
-                    time = time
+                    time = time,
+                    isPinned = isPinned
                 )
             )
         }

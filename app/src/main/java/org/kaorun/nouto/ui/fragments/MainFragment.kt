@@ -52,9 +52,9 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        observeNotes()
         setupRecyclerView()
         setupLayoutMode()
+        observeNotes()
         setupSearchView()
         setupListeners()
         setupInsets()
