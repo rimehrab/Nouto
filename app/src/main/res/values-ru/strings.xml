@@ -47,4 +47,19 @@
     <string name="source_code_summary">Репозиторий проекта на GitHub</string>
     <string name="contact_developer">Связь с разработчиком</string>
     <string name="contact_developer_summary">Оставить отзыв разработчику в Telegram</string>
+    <string name="language">Язык</string>
+    <string name="language_summary">Выбор языка приложения</string>
+    <string name="dynamic_colors">Динамические цвета</string>
+    <string name="dynamic_colors_summary">Цвета, основанные на ваших обоях</string>
+    <string name="pure_black_theme">Чёрная тема</string>
+    <string name="pure_black_theme_summary">Чёрный фон в приложении</string>
+    <string name="pin">Закрепить</string>
+    <string name="unpin">Открепить</string>
+    <string name="note_pinned_message">Заметка была закреплена</string>
+    <string name="note_unpinned_message">Заметка была откреплена</string>
+    <string name="open_menu">Открыть меню</string>
+    <string name="dialog_keepandroidopen_title">Важная информация</string>
+    <string name="dialog_keepandroidopen_warning">Google объявила, что начиная с 2026/2027 года все приложения на сертифицированных устройствах Android будут требовать от разработчиков предоставления своих личных данных для идентификации напрямую Google. Так как разработчики этого приложения не согласны с этим требованием, приложение перестанет работать на сертифицированных устройствах Android после этого времени.</string>
+    <string name="dialog_keepandroidopen_more_info">Подробнее</string>
+    <string name="dialog_keepandroidopen_solution">Решение</string>
 </resources>
