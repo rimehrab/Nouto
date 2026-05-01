@@ -2,6 +2,7 @@
 <ul>
     <li><b>Black Theme:</b> Added support for a new true black theme</li>
     <li><b>Pinned Notes:</b> Added the ability to pin your notes for quick access</li>
+    <li><b>Keep Android Open:</b> Added dialog window that warns user that this app may stop working on certified devices. More on https://keepandroidopen.org/</li>
     <li><b>Localizations:</b> Added Bengali, Estonian, and Hindi translations</li>
 </ul>
 
