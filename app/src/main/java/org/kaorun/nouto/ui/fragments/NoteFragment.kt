@@ -336,8 +336,6 @@ class NoteFragment : BaseFragment(R.layout.fragment_note) {
     }
 
     private fun closeNoteFragment() {
-        saveNote()
-        isSaved = true
         TransitionManager.endTransitions(binding.root.parent as ViewGroup)
         findNavController().popBackStack()
     }
