@@ -60,4 +60,10 @@
     <string name="note_pinned_message">Note has been pinned</string>
     <string name="note_unpinned_message">Note has been unpinned</string>
     <string name="open_menu">Open menu</string>
+    <string name="dialog_keepandroidopen_title">Important information</string>
+    <string name="dialog_keepandroidopen_warning">Google has announced that, starting in 2026/2027, all apps on certified Android devices will require the developer to submit personal identity details directly to Google. Since the developers of this app do not agree to this requirement, this app will no longer work on certified Android devices after that time.</string>
+    <string name="dialog_keepandroidopen_more_info">More info</string>
+    <string name="dialog_keepandroidopen_solution">Solution</string>
+    <string name="dialog_keepandroidopen_solution_uri" translatable="false">https://github.com/woheller69/FreeDroidWarn?tab=readme-ov-file#solutions</string>
+    <string name="dialog_keepandroidopen_uri" translatable="false">https://keepandroidopen.org"</string>
 </resources>

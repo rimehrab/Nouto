@@ -68,4 +68,17 @@
         <item name="android:layout_marginEnd">8dp</item>
         <item name="android:textColor">?colorError</item>
     </style>
+
+    <style name="ButtonDialogNeutral" parent="Widget.Material3Expressive.Button.OutlinedButton">
+        <item name="android:layout_marginEnd">12dp</item>
+    </style>
+
+    <style name="KeepAndroidOpenIcon" parent="MaterialAlertDialog.Material3.Title.Icon">
+        <item name="android:layout_width">64dp</item>
+        <item name="android:layout_height">64dp</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:layout_marginEnd">0dp</item>
+        <item name="android:layout_marginRight">0dp</item>
+        <item name="android:layout_marginBottom">16dp</item>
+    </style>
 </resources>

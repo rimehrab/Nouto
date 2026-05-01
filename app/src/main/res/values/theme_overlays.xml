@@ -19,6 +19,12 @@
         <item name="buttonBarNegativeButtonStyle">@style/ButtonDialogNegative</item>
     </style>
 
+    <style name="ThemeOverlay.MaterialAlertDialog.KeepAndroidOpen" parent="ThemeOverlay.Material3Expressive.MaterialAlertDialog.Centered">
+        <item name="buttonBarPositiveButtonStyle">@style/Widget.Material3Expressive.Button</item>
+        <item name="buttonBarNegativeButtonStyle">@style/ButtonDialogNeutral</item>
+        <item name="materialAlertDialogTitleIconStyle">@style/KeepAndroidOpenIcon</item>
+    </style>
+
     <!-- Default theme -->
     <style name="ThemeOverlay.Nouto.Default.MediumContrast" parent="Theme.Material3Expressive.Light.NoActionBar">
         <item name="colorPrimary">@color/md_theme_primary_mediumContrast</item>
