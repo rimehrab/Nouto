@@ -1,0 +1,12 @@
+<b>🚀 Features & Additions</b>
+<ul>
+    <li><b>Black Theme:</b> Added support for a new true black theme</li>
+    <li><b>Pinned Notes:</b> Added the ability to pin your notes for quick access</li>
+    <li><b>Localizations:</b> Added Bengali, Estonian, and Hindi translations</li>
+</ul>
+
+<b>🐛 Fixes & Improvements</b>
+<ul>
+    <li><b>Layout Fix:</b> Applied proper padding for note</li>
+    <li>Many other fixes and general performance improvements</li>
+</ul>
