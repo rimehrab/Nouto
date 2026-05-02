@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="dialog_keepandroidopen_solution">समाधान</string>
-    <string name="dialog_keepandroidopen_more_info">विवरण</string>
+    <string name="dialog_keepandroidopen_more_info">अधिक विवरण</string>
     <string name="dialog_keepandroidopen_warning">Google ने घोषणा की है कि 2026/2027 से, प्रमाणित Android डिवाइसों पर सभी ऐप्स के लिए डेवलपर्स को अपनी व्यक्तिगत पहचान संबंधी जानकारी सीधे Google को जमा करनी होगी। चूँकि इस ऐप के डेवलपर्स इस आवश्यकता से सहमत नहीं हैं, यह ऐप उस समय के बाद प्रमाणित Android डिवाइसों पर काम नहीं करेगा।</string>
+    <string name="language_summary">ऐप के लिए भाषा चुनें</string>
+    <string name="dynamic_colors">गतिशील रंग</string>
+    <string name="dynamic_colors_summary">आपके वॉलपेपर के आधार पर रंग</string>
+    <string name="pure_black_theme">प्योर काली थीम</string>
+    <string name="pure_black_theme_summary">ऐप का बैकग्राउंड काला करें</string>
+    <string name="pin">पिन करें</string>
+    <string name="unpin">अनपिन करें</string>
+    <string name="note_pinned_message">नोट पिन कर दिया गया है</string>
+    <string name="note_unpinned_message">नोट अनपिन कर दिया गया है</string>
+    <string name="open_menu">मेनू खोलें</string>
+    <string name="dialog_keepandroidopen_title">महत्वपूर्ण सूचना</string>
+    <string name="language">भाषा</string>
+    <string name="delete_notes_dialog_message">नोट्स स्थायी रूप से हटा दिए जाएंगे और उन्हें पुनः प्राप्त नहीं किया जा सकेगा।</string>
+    <string name="type_to_start_search">खोज शुरू करने के लिए टाइप करें</string>
 </resources>
